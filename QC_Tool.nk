@@ -1,0 +1,1380 @@
+set cut_paste_input [stack 0]
+version 14.0 v5
+push $cut_paste_input
+Group {
+ name TECH_TOOL
+ tile_color 0x282828ff
+ gl_color 0x2a2a2aff
+ label "\n\n\n\n<i>\[knob QC]\n"
+ note_font "DejaVu Sans Bold Italic"
+ note_font_color 0xf2c47fff
+ selected true
+ xpos -516
+ ypos 1851
+ addUserKnob {20 User l -}
+ addUserKnob {26 txt l "" +STARTLINE T "<b><font size=\"40\"><font color=\"#BAA655\">QC</font></b>"}
+ addUserKnob {26 ""}
+ addUserKnob {22 Push l "<font color=\"#BAA655\">Set Input Viewer</font>" -STARTLINE T "import nuke\n\ndef toggle_active_viewer_input():\n    # Get the active viewer node\n    active_viewer = nuke.activeViewer()\n    \n    if active_viewer is not None:\n        # Get the viewer node\n        viewer_node = active_viewer.node()\n        \n        # Access the input_process_node knob\n        input_process_knob = viewer_node\['input_process_node']\n        \n        # Toggle the value of the input process node\n        if input_process_knob.value() == 'VIEWER_INPUT':\n            input_process_knob.setValue('TECH_TOOL')\n        else:\n            input_process_knob.setValue('VIEWER_INPUT')\n    else:\n        nuke.message(\"No active viewer found.\")\n\ntoggle_active_viewer_input()"}
+ addUserKnob {26 ""}
+ addUserKnob {41 View l "<font color=\"#BAA655\">Input View" T THIS_SWITCH.View}
+ addUserKnob {41 QC l "<font color=\"#BAA655\">Operation" T MASTERSWITCH.QC}
+ addUserKnob {26 ""}
+ addUserKnob {41 stops l "<font color=\"#BAA655\">Exp Stops" T Grade_In_Stops.stops}
+ addUserKnob {41 GrainType l "<font color=\"#BAA655\">Grain Type" T GRAINSWITCH.GrainType}
+ addUserKnob {26 ""}
+ addUserKnob {26 txt2 l "" +STARTLINE T "<div style=\"text-align: left; font-size: 10px; color: #666666; font-style: italic;\">\n  v 1.1 : 2019-02\n</div>"}
+}
+ Input {
+  inputs 0
+  name InputPLATE
+  xpos 3740
+  ypos -9
+  number 1
+ }
+ Shuffle {
+  alpha black
+  name Shuffle1
+  xpos 3740
+  ypos 71
+ }
+ Dot {
+  name Dot84
+  label PLATE
+  note_font "Bitstream Vera Sans Bold"
+  note_font_size 40
+  xpos 3773
+  ypos 153
+ }
+set Nad18b6e0 [stack 0]
+ Input {
+  inputs 0
+  name InputCOMP
+  xpos -600
+  ypos -9
+ }
+ Shuffle {
+  alpha black
+  name Shuffle2
+  xpos -600
+  ypos 71
+ }
+ Switch {
+  inputs 2
+  which {{parent.THIS_SWITCH.View}}
+  name Switch1
+  xpos -600
+  ypos 151
+ }
+ Dot {
+  name Dot1
+  note_font_size 40
+  xpos -567
+  ypos 193
+ }
+ Dot {
+  name Dot31
+  note_font_size 40
+  xpos -567
+  ypos 913
+ }
+set Nac3bd560 [stack 0]
+ Dot {
+  name Dot30
+  note_font_size 40
+  xpos -427
+  ypos 913
+ }
+set Nac3c2650 [stack 0]
+ Dot {
+  name Dot28
+  note_font_size 40
+  xpos -287
+  ypos 913
+ }
+set Nac3c7810 [stack 0]
+ Dot {
+  name Dot27
+  note_font_size 40
+  xpos -147
+  ypos 913
+ }
+set N28d29d70 [stack 0]
+ Dot {
+  name Dot26
+  note_font_size 40
+  xpos -7
+  ypos 913
+ }
+set N28d2ed90 [stack 0]
+ Dot {
+  name Dot25
+  note_font_size 40
+  xpos 133
+  ypos 913
+ }
+set N28d33e30 [stack 0]
+ Dot {
+  name Dot24
+  note_font_size 40
+  xpos 273
+  ypos 913
+ }
+set N28d38ef0 [stack 0]
+ Dot {
+  name Dot23
+  note_font_size 40
+  xpos 413
+  ypos 913
+ }
+set Nc464cd0 [stack 0]
+ Dot {
+  name Dot22
+  note_font_size 40
+  xpos 553
+  ypos 913
+ }
+set Nc469d90 [stack 0]
+ Dot {
+  name Dot21
+  note_font_size 40
+  xpos 833
+  ypos 913
+ }
+set Nc46ee50 [stack 0]
+ Dot {
+  name Dot20
+  note_font_size 40
+  xpos 1533
+  ypos 913
+ }
+set N71bcd080 [stack 0]
+ Dot {
+  name Dot19
+  note_font_size 40
+  xpos 2093
+  ypos 913
+ }
+set N71bd20d0 [stack 0]
+ Dot {
+  name Dot18
+  note_font_size 40
+  xpos 2933
+  ypos 913
+ }
+set N71bd7190 [stack 0]
+ Dot {
+  name Dot6
+  note_font_size 40
+  xpos 4473
+  ypos 913
+ }
+set N18bea820 [stack 0]
+ Dot {
+  name Dot7
+  note_font_size 40
+  xpos 4753
+  ypos 913
+ }
+set N18bef8e0 [stack 0]
+ Dot {
+  name Dot17
+  note_font_size 40
+  xpos 5173
+  ypos 913
+ }
+set N18bf49a0 [stack 0]
+ Dot {
+  name Dot11
+  note_font_size 40
+  xpos 5733
+  ypos 913
+ }
+set Nf50307d0 [stack 0]
+ Dot {
+  name Dot12
+  note_font_size 40
+  xpos 5873
+  ypos 913
+ }
+set Nf5035890 [stack 0]
+ Dot {
+  name Dot13
+  note_font_size 40
+  xpos 6013
+  ypos 913
+ }
+set Nf503a950 [stack 0]
+ Dot {
+  name Dot14
+  note_font_size 40
+  xpos 6153
+  ypos 913
+ }
+set N18b19690 [stack 0]
+ Dot {
+  name Dot15
+  note_font_size 40
+  xpos 6853
+  ypos 913
+ }
+set N18b1e730 [stack 0]
+ Dot {
+  name Dot16
+  note_font_size 40
+  xpos 6993
+  ypos 913
+ }
+ Expression {
+  expr0 isnan(r)
+  expr1 isnan(g)
+  expr2 isnan(b)
+  expr3 isnan(r+g+b)
+  name Expression14
+  xpos 6960
+  ypos 1431
+ }
+ Expression {
+  expr0 clamp(r+g+b)
+  expr1 clamp(r+g+b)
+  expr2 clamp(r+g+b)
+  expr3 clamp(r+g+b)
+  name Expression15
+  xpos 6960
+  ypos 1471
+ }
+ Dot {
+  name Dot43
+  note_font_size 40
+  xpos 6993
+  ypos 2993
+ }
+push $N18b1e730
+ Expression {
+  temp_name0 zero
+  temp_expr0 "a>0?r <= 0 ? 1 : g <= 0 ?  1 : b <= 0 ? 1 :0:0"
+  temp_name1 max
+  temp_expr1 "r >= 14 ? 1 : g >= 14 ?  1 : b >= 14 ? 1 :0"
+  expr0 "isinf(r) ? 0 :zero?1:r*.05"
+  expr1 "isinf(g) ? 0 :max?1:g*.05"
+  expr2 "isinf(r) ? 1 : isinf(g) ?  1 :isinf(b) ? 1:isinf(r) ? 1 : isnan(g) ?  1 :isnan(b) ? 1:r*.05"
+  channel3 alpha
+  expr3 0
+  name expression1
+  xpos 6820
+  ypos 1431
+ }
+ Dot {
+  name Dot44
+  note_font_size 40
+  xpos 6853
+  ypos 2833
+ }
+push $N18b19690
+ Expression {
+  expr3 "b<0 ? 1:0"
+  name Expression12
+  xpos 6120
+  ypos 1431
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {0 0 1 0}
+  name Constant38
+  xpos 6400
+  ypos 1927
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy21
+  xpos 6120
+  ypos 1945
+ }
+ Grade {
+  multiply 30
+  name Grade1
+  xpos 6120
+  ypos 1991
+ }
+ Premult {
+  name Premult28
+  xpos 6120
+  ypos 2031
+ }
+ Blur {
+  channels rgb
+  size 5.4
+  name Blur1
+  xpos 5980
+  ypos 2031
+ }
+push $Nf503a950
+ Expression {
+  expr3 "g<0 ? 1:0"
+  name Expression13
+  xpos 5980
+  ypos 1431
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {0 1 0 0}
+  name Constant37
+  xpos 6400
+  ypos 1807
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy20
+  xpos 5980
+  ypos 1825
+ }
+ Grade {
+  multiply 30
+  name Grade2
+  xpos 5980
+  ypos 1871
+ }
+ Premult {
+  name Premult27
+  xpos 5980
+  ypos 1911
+ }
+ Blur {
+  channels rgb
+  size 5.4
+  name Blur2
+  xpos 5840
+  ypos 1911
+ }
+push $Nf5035890
+ Expression {
+  expr3 "r<0 ? 1:0"
+  name Expression1
+  xpos 5840
+  ypos 1431
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {1 0 0 0}
+  name Constant36
+  xpos 6400
+  ypos 1687
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  bbox A
+  name Copy19
+  xpos 5840
+  ypos 1705
+ }
+ Grade {
+  multiply 30
+  name Grade3
+  xpos 5840
+  ypos 1751
+ }
+ Premult {
+  name Premult26
+  xpos 5840
+  ypos 1791
+ }
+ Blur {
+  channels rgb
+  size 5.4
+  name Blur3
+  xpos 5840
+  ypos 1831
+ }
+push $Nf50307d0
+ Grade {
+  white 0.1
+  name Grade43
+  xpos 5700
+  ypos 1551
+ }
+ Merge2 {
+  inputs 2
+  bbox B
+  name Merge59
+  xpos 5700
+  ypos 1791
+ }
+ Merge2 {
+  inputs 2
+  bbox B
+  name Merge60
+  xpos 5700
+  ypos 1911
+ }
+ Merge2 {
+  inputs 2
+  bbox B
+  name Merge61
+  xpos 5700
+  ypos 2031
+ }
+ Dot {
+  name Dot90
+  note_font_size 40
+  xpos 5733
+  ypos 2193
+ }
+ Dot {
+  name Dot42
+  note_font_size 40
+  xpos 5733
+  ypos 2753
+ }
+push $N18bf49a0
+ Reformat {
+  type scale
+  scale {2 2}
+  filter impulse
+  name Reformat131
+  xpos 5140
+  ypos 1271
+ }
+ Tile {
+  rows 2
+  columns 2
+  filter impulse
+  name Tile3
+  xpos 5140
+  ypos 1351
+ }
+ Reformat {
+  type scale
+  scale {0.5 0.5}
+  resize none
+  filter impulse
+  name Reformat132
+  xpos 5140
+  ypos 1431
+  disable {{reformat_out-1}}
+ }
+ Dot {
+  name Dot45
+  note_font_size 40
+  xpos 5173
+  ypos 2193
+ }
+push $N18bef8e0
+push $Nad18b6e0
+ Dot {
+  name Dot8
+  note_font_size 40
+  xpos 4893
+  ypos 153
+ }
+ Dot {
+  name Dot9
+  note_font_size 40
+  xpos 4893
+  ypos 1473
+ }
+ Group {
+  inputs 2
+  name Common1
+  tile_color 0x31593dff
+  note_font_color 0xffff00ff
+  xpos 4720
+  ypos 1471
+ }
+  Input {
+   inputs 0
+   name InputPatch
+   xpos 509
+   ypos -30
+  }
+  Shuffle {
+   alpha black
+   name Shuffle2
+   xpos 509
+   ypos 42
+  }
+  Input {
+   inputs 0
+   name InputPlate
+   xpos 729
+   ypos -30
+   number 1
+  }
+  Shuffle {
+   alpha black
+   name Shuffle1
+   xpos 729
+   ypos 42
+  }
+  Merge2 {
+   inputs 2
+   operation difference
+   name Merge1
+   xpos 619
+   ypos 90
+  }
+  Expression {
+   expr3 "r+g+b > 0"
+   name Expression1
+   xpos 619
+   ypos 158
+  }
+  Clamp {
+   name Clamp1
+   xpos 619
+   ypos 224
+  }
+  Shuffle {
+   red alpha
+   green alpha
+   blue alpha
+   name Shuffle3
+   xpos 619
+   ypos 326
+  }
+  Output {
+   name Output1
+   xpos 619
+   ypos 407
+  }
+  MergeExpression {
+   inputs 0
+   expr3 "abs(Br-Ar) > tolerance || abs(Bg-Ag) > tolerance || abs(Bb-Ab)\n > tolerance?1:0"
+   name MergeExpression1
+   xpos 786
+   ypos 241
+   addUserKnob {20 User}
+   addUserKnob {7 tolerance R 0 0.1}
+   tolerance 0.001
+  }
+ end_group
+set N49ac0fd0 [stack 0]
+ Dot {
+  name Dot10
+  note_font_size 40
+  xpos 4753
+  ypos 1553
+ }
+push $N49ac0fd0
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.7636666298 0.01866666414 -0.05633336306 0}
+  name Constant32
+  xpos 4300
+  ypos 1447
+ }
+push $N18bea820
+ Keymix {
+  inputs 3
+  mix 0.5
+  name Keymix4
+  xpos 4440
+  ypos 1465
+ }
+ Merge2 {
+  inputs 2
+  bbox B
+  Achannels alpha
+  Bchannels alpha
+  output alpha
+  name Merge1
+  xpos 4440
+  ypos 1545
+ }
+ Dot {
+  name Dot29
+  note_font_size 40
+  xpos 4473
+  ypos 2073
+ }
+ CheckerBoard2 {
+  inputs 0
+  boxsize 78
+  centerlinewidth 0
+  name CheckerBoard1
+  xpos 1780
+  ypos 2167
+ }
+ Shuffle {
+  alpha red
+  name Shuffle18
+  xpos 1780
+  ypos 2271
+ }
+ Grade {
+  channels alpha
+  blackpoint {0.1000000015 0.1000000015 0.1000000015 0.200000003}
+  whitepoint {0.5 0.5 0.5 0.5}
+  name Grade45
+  xpos 1780
+  ypos 2305
+ }
+push $Nad18b6e0
+ ColorLookup {
+  lut {master {}
+    red {curve C 0.047 x0.4560000002 0.225 x1 0.7}
+    green {curve C 0.032 x0.4460000098 0.231 x1 0.663}
+    blue {curve C 0.037 x0.4560000002 0.608 x1 0.608 x1.390300035 0.6411}
+    alpha {}}
+  name ColorLookup1
+  xpos 3460
+  ypos 1431
+ }
+ OCIOColorSpace {
+  in_colorspace ACEScg
+  out_colorspace ACEScct
+  name OCIOColorSpace4
+  label "(\[value in_colorspace ] > \[value out_colorspace])"
+  xpos 3460
+  ypos 1505
+ }
+ Colorspace {
+  colorspace_out HSL
+  name Colorspace1
+  xpos 3460
+  ypos 1551
+ }
+set N6c34bef0 [stack 0]
+ Dot {
+  name Dot2
+  xpos 3773
+  ypos 1553
+ }
+ Dot {
+  name Dot3
+  xpos 3773
+  ypos 1673
+ }
+push $N6c34bef0
+ Dot {
+  name Dot4
+  xpos 3493
+  ypos 1633
+ }
+set N49df5dc0 [stack 0]
+ Group {
+  name RankFilter1
+  help "Rankfilter will pick the kth element out of a value set collected by the kernel, unlike a median which will go for the middle element.\n\nUsefull to bias more towards low or high frequencies. \n\nKernel size 1 equals a 3x3 filer, 2 a 5x5 filter. The size gets capped at 16x16\n\nK value of 0 goes for the lowest, 1 for the highest.\n."
+  xpos 3600
+  ypos 1631
+  addUserKnob {20 RankFilter}
+  addUserKnob {41 RankFilter_size l size t "Kernel size 1 equals a 3x3 filer, 2 a 5x5 filter. The size gets capped at 16x16." T RankFilter1.RankFilter_size}
+  addUserKnob {41 RankFilter_k l k T RankFilter1.RankFilter_k}
+ }
+  Input {
+   inputs 0
+   name Input
+   xpos -494
+   ypos 177
+  }
+  BlinkScript {
+   recompileCount 94
+   ProgramGroup 1
+   KernelDescription "2 \"RankFilter\" iterate componentWise 9c432efd1fb9d867b50af955092987a704e875a37f1e7d0c6531e51905445acb 2 \"imageIn\" Read Ranged2D \"imageOut\" Write Point 2 \"size\" Int 1 AQAAAA== \"k\" Float 1 AAAAPw== 2 \"size\" 1 1 \"frequency\" 1 1 2 \"imageInrangeMin\" Int 2 1 AAAAAAAAAAA= \"imageInrangeMax\" Int 2 1 AAAAAAAAAAA="
+   kernelSource "// by Marian Mavrovic 2017\n\nkernel RankFilter : public ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRanged2D, eEdgeClamped> imageIn; \n  Image<eWrite, eAccessPoint> imageOut;          \n\nparam:\n  int size;  //The horizontal radius of our box blur\n  float frequency;  //The vertical radius of our box blur\n\nlocal:\n//int _filterSize;\n\n  void define() \{\n    defineParam(size, \"size\", 1); \n    defineParam(frequency, \"k\", 0.5f); \n  \}\n\n  void init()\n  \{\n    imageIn.setRange(-size-1, -size-1, size+1, size+1);\n\n  \}\n\n  void process(int2 pos)\n  \{\n\n    float vals\[256];\n\n    float size0 = size; \n\n    if (size<=0) \{\n      size0 = 1;\n    \}\n\n    if (size>=16) \{\n      size0 = 16;\n    \}\n\n    for (int j = -size0, index = 0; j <= size0; j++) \{\n      for (int i = -size0; i <= size0; i++, index++) \{\n        vals\[index] = imageIn(i, j);\n      \}\n    \}\n\n\n    float temp;\n    int _filterSize = (2 * size0 + 1) * (2 * size0 + 1);\n\n    for (int i = 0; i < _filterSize; i++) \{\n      for (int j = 0; j < (_filterSize - i - 1); j++) \{\n        if (vals\[j] > vals\[j + 1]) \{\n          temp = vals\[j];\n          vals\[j] = vals\[j + 1];\n          vals\[j + 1] = temp;\n        \}\n      \}\n    \}\n\n    int temp2 = int ( round ( _filterSize / ( 1.0  / frequency ) ) ) ;\n\n    if (temp2 >= _filterSize ) \{\n      temp2 = temp2-1;\n    \}\n\n    imageOut() = vals\[temp2];\n    \n  \}\n\};"
+   rebuild ""
+   rebuild_finalise ""
+   name RankFilter1
+   selected true
+   xpos -494
+   ypos 242
+  }
+  Output {
+   name Output1
+   xpos -494
+   ypos 327
+  }
+ end_group
+ Merge2 {
+  inputs 2
+  operation min
+  mix 0.5
+  name Min1
+  label "\[switch \"1\" \[value mix] \"\" default \{set d \"\[value mix] mixed\"\}] "
+  xpos 3600
+  ypos 1665
+ }
+ Dot {
+  name Dot5
+  xpos 3633
+  ypos 1753
+ }
+push $N49df5dc0
+ Merge2 {
+  inputs 2
+  operation difference
+  bbox B
+  name Merge2
+  label "\[switch \"1\" \[value mix] \"\" default \{set d \"\[value mix] mixed\"\}] "
+  xpos 3460
+  ypos 1751
+ }
+ Multiply {
+  value 3
+  name Multiply1
+  xpos 3460
+  ypos 1945
+ }
+ Dot {
+  name Dot46
+  note_font_size 40
+  xpos 3493
+  ypos 2153
+ }
+push $Nad18b6e0
+ OCIOColorSpace {
+  in_colorspace ACEScg
+  out_colorspace ACEScct
+  name OCIOColorSpace3
+  label "(\[value in_colorspace ] > \[value out_colorspace])"
+  xpos 3320
+  ypos 1425
+ }
+set N43358f00 [stack 0]
+ Blur {
+  channels rgba
+  size {{parent.Blur23.size}}
+  name Blur18
+  xpos 3180
+  ypos 1511
+ }
+push $N43358f00
+ Merge2 {
+  inputs 2
+  operation difference
+  name Merge47
+  xpos 3320
+  ypos 1511
+ }
+push $Nad18b6e0
+ OCIOColorSpace {
+  in_colorspace ACEScg
+  out_colorspace ACEScct
+  name OCIOColorSpace13
+  label "(\[value in_colorspace ] > \[value out_colorspace])"
+  xpos 2480
+  ypos 1745
+ }
+set N6122b560 [stack 0]
+ ColorMatrix {
+  matrix {
+      {0.412424 0.357579 0.180464}
+      {0.212656 0.715158 0.0721856}
+      {0.0193324 0.119193 0.950444}
+    }
+  name RGBtoXYZ1
+  xpos 2760
+  ypos 1791
+ }
+ Expression {
+  expr0 (116*pow(g,1/3)-16)/100
+  expr1 500*(pow(r,1/3)-pow(g,1/3))/100
+  expr2 200*(pow(g,1/3)-pow(b,1/3))/100
+  name __XYZ_Lab__1
+  xpos 2760
+  ypos 1831
+ }
+ Matrix {
+  channels rgba
+  matrix {
+      {0 -1 0}
+      {-1 5 -1}
+      {0 -1 0}
+    }
+  normalize true
+  name Matrix1
+  label Sharpen
+  xpos 2760
+  ypos 1865
+ }
+ Expression {
+  expr0 pow(((g*100)/500+(((r*100)+16)/116)),3)
+  expr1 pow(((r*100+16)/116),3)
+  expr2 pow((((r*100+16)/116)-(b*100)/200),3)
+  name LabXyz1
+  xpos 2760
+  ypos 1911
+ }
+ ColorMatrix {
+  matrix {
+      {0.412424 0.357579 0.180464}
+      {0.212656 0.715158 0.0721856}
+      {0.0193324 0.119193 0.950444}
+    }
+  invert true
+  name XYZtoRGB1
+  xpos 2760
+  ypos 1951
+ }
+push $N6122b560
+ Merge2 {
+  inputs 2
+  operation from
+  bbox B
+  name Merge50
+  xpos 2480
+  ypos 1951
+ }
+ Switch {
+  inputs 3
+  which {{parent.SW1.which}}
+  name SW2
+  xpos 2480
+  ypos 2151
+ }
+ Dot {
+  name Dot47
+  note_font_size 40
+  xpos 2513
+  ypos 2313
+ }
+push $N71bcd080
+ ColorLookup {
+  lut {master {}
+    red {curve C 0.047 x0.4560000002 0.225 x1 0.7}
+    green {curve C 0.032 x0.4460000098 0.231 x1 0.663}
+    blue {curve C 0.037 x0.4560000002 0.608 x1 0.608 x1.390300035 0.6411}
+    alpha {}}
+  name ColorLookup2
+  xpos 1500
+  ypos 1311
+ }
+ OCIOColorSpace {
+  in_colorspace ACEScg
+  out_colorspace ACEScct
+  name OCIOColorSpace6
+  label "(\[value in_colorspace ] > \[value out_colorspace])"
+  xpos 1500
+  ypos 1345
+ }
+ Colorspace {
+  colorspace_out HSL
+  name Colorspace2
+  xpos 1500
+  ypos 1431
+ }
+set Necc85290 [stack 0]
+ Dot {
+  name Dot128
+  xpos 1673
+  ypos 1433
+ }
+ Dot {
+  name Dot129
+  xpos 1673
+  ypos 1553
+ }
+push $Necc85290
+ Dot {
+  name Dot130
+  xpos 1533
+  ypos 1513
+ }
+set N99aaf5c0 [stack 0]
+ Group {
+  name RankFilter
+  help "Rankfilter will pick the kth element out of a value set collected by the kernel, unlike a median which will go for the middle element.\n\nUsefull to bias more towards low or high frequencies. \n\nKernel size 1 equals a 3x3 filer, 2 a 5x5 filter. The size gets capped at 16x16\n\nK value of 0 goes for the lowest, 1 for the highest.\n."
+  xpos 1640
+  ypos 1511
+  addUserKnob {20 RankFilter}
+  addUserKnob {41 RankFilter_size l size t "Kernel size 1 equals a 3x3 filer, 2 a 5x5 filter. The size gets capped at 16x16." T RankFilter1.RankFilter_size}
+  addUserKnob {41 RankFilter_k l k T RankFilter1.RankFilter_k}
+ }
+  Input {
+   inputs 0
+   name Input
+   xpos -494
+   ypos 177
+  }
+  BlinkScript {
+   recompileCount 94
+   ProgramGroup 1
+   KernelDescription "2 \"RankFilter\" iterate componentWise 9c432efd1fb9d867b50af955092987a704e875a37f1e7d0c6531e51905445acb 2 \"imageIn\" Read Ranged2D \"imageOut\" Write Point 2 \"size\" Int 1 AQAAAA== \"k\" Float 1 AAAAPw== 2 \"size\" 1 1 \"frequency\" 1 1 2 \"imageInrangeMin\" Int 2 1 AAAAAAAAAAA= \"imageInrangeMax\" Int 2 1 AAAAAAAAAAA="
+   kernelSource "// by Marian Mavrovic 2017\n\nkernel RankFilter : public ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRanged2D, eEdgeClamped> imageIn; \n  Image<eWrite, eAccessPoint> imageOut;          \n\nparam:\n  int size;  //The horizontal radius of our box blur\n  float frequency;  //The vertical radius of our box blur\n\nlocal:\n//int _filterSize;\n\n  void define() \{\n    defineParam(size, \"size\", 1); \n    defineParam(frequency, \"k\", 0.5f); \n  \}\n\n  void init()\n  \{\n    imageIn.setRange(-size-1, -size-1, size+1, size+1);\n\n  \}\n\n  void process(int2 pos)\n  \{\n\n    float vals\[256];\n\n    float size0 = size; \n\n    if (size<=0) \{\n      size0 = 1;\n    \}\n\n    if (size>=16) \{\n      size0 = 16;\n    \}\n\n    for (int j = -size0, index = 0; j <= size0; j++) \{\n      for (int i = -size0; i <= size0; i++, index++) \{\n        vals\[index] = imageIn(i, j);\n      \}\n    \}\n\n\n    float temp;\n    int _filterSize = (2 * size0 + 1) * (2 * size0 + 1);\n\n    for (int i = 0; i < _filterSize; i++) \{\n      for (int j = 0; j < (_filterSize - i - 1); j++) \{\n        if (vals\[j] > vals\[j + 1]) \{\n          temp = vals\[j];\n          vals\[j] = vals\[j + 1];\n          vals\[j + 1] = temp;\n        \}\n      \}\n    \}\n\n    int temp2 = int ( round ( _filterSize / ( 1.0  / frequency ) ) ) ;\n\n    if (temp2 >= _filterSize ) \{\n      temp2 = temp2-1;\n    \}\n\n    imageOut() = vals\[temp2];\n    \n  \}\n\};"
+   rebuild ""
+   rebuild_finalise ""
+   name RankFilter1
+   selected true
+   xpos -494
+   ypos 242
+  }
+  Output {
+   name Output1
+   xpos -494
+   ypos 327
+  }
+ end_group
+ Merge2 {
+  inputs 2
+  operation min
+  mix 0.5
+  name Min2
+  label "\[switch \"1\" \[value mix] \"\" default \{set d \"\[value mix] mixed\"\}] "
+  xpos 1640
+  ypos 1545
+ }
+ Dot {
+  name Dot131
+  xpos 1673
+  ypos 1633
+ }
+push $N99aaf5c0
+ Merge2 {
+  inputs 2
+  operation difference
+  bbox B
+  name Merge48
+  label "\[switch \"1\" \[value mix] \"\" default \{set d \"\[value mix] mixed\"\}] "
+  xpos 1500
+  ypos 1631
+ }
+ Multiply {
+  value 3
+  name Multiply6
+  xpos 1500
+  ypos 1825
+ }
+ Dot {
+  name Dot40
+  note_font_size 40
+  xpos 1533
+  ypos 2113
+ }
+push $N71bd7190
+ OCIOColorSpace {
+  in_colorspace ACEScg
+  out_colorspace ACEScct
+  name OCIOColorSpace2
+  label "(\[value in_colorspace ] > \[value out_colorspace])"
+  xpos 2900
+  ypos 1425
+ }
+set Nee8a7d00 [stack 0]
+ Blur {
+  channels rgba
+  size 2.1
+  name Blur23
+  xpos 2760
+  ypos 1511
+ }
+push $Nee8a7d00
+ Merge2 {
+  inputs 2
+  operation difference
+  name Merge51
+  xpos 2900
+  ypos 1511
+ }
+push $N71bd20d0
+ OCIOColorSpace {
+  in_colorspace ACEScg
+  out_colorspace ACEScct
+  name OCIOColorSpace5
+  label "(\[value in_colorspace ] > \[value out_colorspace])"
+  xpos 2060
+  ypos 1305
+ }
+set N1366a430 [stack 0]
+ ColorMatrix {
+  matrix {
+      {0.412424 0.357579 0.180464}
+      {0.212656 0.715158 0.0721856}
+      {0.0193324 0.119193 0.950444}
+    }
+  name RGBtoXYZ
+  xpos 2340
+  ypos 1351
+ }
+ Expression {
+  expr0 (116*pow(g,1/3)-16)/100
+  expr1 500*(pow(r,1/3)-pow(g,1/3))/100
+  expr2 200*(pow(g,1/3)-pow(b,1/3))/100
+  name __XYZ_Lab__
+  xpos 2340
+  ypos 1391
+ }
+ Matrix {
+  channels rgba
+  matrix {
+      {0 -1 0}
+      {-1 5 -1}
+      {0 -1 0}
+    }
+  normalize true
+  name Matrix8
+  label Sharpen
+  xpos 2340
+  ypos 1425
+ }
+ Expression {
+  expr0 pow(((g*100)/500+(((r*100)+16)/116)),3)
+  expr1 pow(((r*100+16)/116),3)
+  expr2 pow((((r*100+16)/116)-(b*100)/200),3)
+  name LabXyz
+  xpos 2340
+  ypos 1471
+ }
+ ColorMatrix {
+  matrix {
+      {0.412424 0.357579 0.180464}
+      {0.212656 0.715158 0.0721856}
+      {0.0193324 0.119193 0.950444}
+    }
+  invert true
+  name XYZtoRGB
+  xpos 2340
+  ypos 1511
+ }
+push $N1366a430
+ Merge2 {
+  inputs 2
+  operation from
+  bbox B
+  name Merge52
+  xpos 2060
+  ypos 1511
+ }
+ Switch {
+  inputs 3
+  which {{parent.GRAINSWITCH.GrainType}}
+  name SW1
+  xpos 2060
+  ypos 2111
+ }
+ Keymix {
+  inputs 3
+  name Keymix2
+  xpos 2060
+  ypos 2305
+ }
+ EXPTool {
+  red 0.85
+  green 0.85
+  blue 0.85
+  name Exposure4
+  xpos 2060
+  ypos 2431
+ }
+ Expression {
+  temp_name0 rw
+  temp_expr0 Weight.r
+  temp_name1 gw
+  temp_expr1 Weight.g
+  temp_name2 bw
+  temp_expr2 Weight.b
+  expr0 ((rw*r)+(gw*g)+(bw*b))
+  expr1 ((rw*r)+(gw*g)+(bw*b))
+  expr2 ((rw*r)+(gw*g)+(bw*b))
+  name Monochrome_Tg1
+  tile_color 0x31593dff
+  note_font_color 0xffff00ff
+  xpos 2060
+  ypos 2551
+  disable {{parent.GRAINSWITCH.GrainColour}}
+  addUserKnob {20 ColourWeight}
+  addUserKnob {18 Weight}
+  Weight {0.3 0.59 0.11}
+  addUserKnob {6 Weight_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ }
+ Dot {
+  name Dot41
+  note_font_size 40
+  xpos 2093
+  ypos 2753
+ }
+push $Nc46ee50
+ ColorMatrix {
+  matrix {
+      {0.412424 0.357579 0.180464}
+      {0.212656 0.715158 0.0721856}
+      {0.0193324 0.119193 0.950444}
+    }
+  name RGBtoXYZ2
+  xpos 800
+  ypos 1431
+ }
+ Expression {
+  expr0 (116*pow(g,1/3)-16)/100
+  expr1 500*(pow(r,1/3)-pow(g,1/3))/100
+  expr2 200*(pow(g,1/3)-pow(b,1/3))/100
+  name __XYZ_Lab__2
+  xpos 800
+  ypos 1471
+ }
+ Matrix {
+  channels rgba
+  matrix {
+      {0 -1 0}
+      {-1 5 -1}
+      {0 -1 0}
+    }
+  normalize true
+  name Matrix2
+  label Sharpen
+  xpos 800
+  ypos 1505
+ }
+ Expression {
+  expr0 pow(((g*100)/500+(((r*100)+16)/116)),3)
+  expr1 pow(((r*100+16)/116),3)
+  expr2 pow((((r*100+16)/116)-(b*100)/200),3)
+  name LabXyz2
+  xpos 800
+  ypos 1551
+ }
+ ColorMatrix {
+  matrix {
+      {0.412424 0.357579 0.180464}
+      {0.212656 0.715158 0.0721856}
+      {0.0193324 0.119193 0.950444}
+    }
+  invert true
+  name XYZtoRGB2
+  xpos 800
+  ypos 1591
+ }
+ Dot {
+  name Dot39
+  note_font_size 40
+  xpos 833
+  ypos 1993
+ }
+push $Nc464cd0
+ Keyer {
+  operation "luminance key"
+  range {0.2731244161 1 1 1}
+  name Keyer13
+  xpos 380
+  ypos 1585
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  name Constant1
+  xpos 660
+  ypos 1487
+ }
+ Expression {
+  expr0 "sin(sqrt(x * x + y * y ) / 1)"
+  expr1 "sin(sqrt(x * x + y * y ) / 1)"
+  expr2 "sin(sqrt(x * x + y * y ) / 1)"
+  name Expression6
+  xpos 660
+  ypos 1591
+ }
+push $Nc469d90
+ Keymix {
+  inputs 3
+  name Keymix3
+  xpos 520
+  ypos 1585
+ }
+ Dot {
+  name Dot38
+  note_font_size 40
+  xpos 553
+  ypos 1993
+ }
+push $N28d38ef0
+ Expression {
+  expr0 r+(x==(width/2)?10000:0)+(y==(height/2)?10000:0)
+  name CenterMeasure2
+  xpos 240
+  ypos 1591
+ }
+ Dot {
+  name Dot37
+  note_font_size 40
+  xpos 273
+  ypos 1993
+ }
+push $N28d33e30
+ Mirror2 {
+  flop true
+  name Mirror2_3
+  xpos 100
+  ypos 1591
+ }
+ Dot {
+  name Dot36
+  note_font_size 40
+  xpos 133
+  ypos 1993
+ }
+push $N28d2ed90
+ Saturation {
+  saturation 4
+  mode "Ccir 601"
+  name Saturation1
+  xpos -40
+  ypos 1591
+ }
+ Dot {
+  name Dot35
+  note_font_size 40
+  xpos -7
+  ypos 1993
+ }
+push $N28d29d70
+ OCIOLogConvert {
+  operation "lin to log"
+  name OCIOLogConvert2
+  xpos -180
+  ypos 1591
+ }
+ Dot {
+  name Dot34
+  note_font_size 40
+  xpos -147
+  ypos 1993
+ }
+push $Nac3c7810
+ OCIOColorSpace {
+  in_colorspace ACEScg
+  out_colorspace ACEScct
+  name OCIOColorSpace1
+  label "(\[value in_colorspace ] > \[value out_colorspace])"
+  xpos -320
+  ypos 1465
+ }
+ Saturation {
+  saturation 4
+  name Saturation2
+  xpos -320
+  ypos 1591
+ }
+ Dot {
+  name Dot33
+  note_font_size 40
+  xpos -287
+  ypos 1993
+ }
+push $Nac3c2650
+ Expression {
+  temp_name0 rw
+  temp_expr0 Weight.r
+  temp_name1 gw
+  temp_expr1 Weight.g
+  temp_name2 bw
+  temp_expr2 Weight.b
+  expr0 ((rw*r)+(gw*g)+(bw*b))
+  expr1 ((rw*r)+(gw*g)+(bw*b))
+  expr2 ((rw*r)+(gw*g)+(bw*b))
+  name Monochrome_Tg
+  tile_color 0x31593dff
+  note_font_color 0xffff00ff
+  xpos -460
+  ypos 1591
+  addUserKnob {20 ColourWeight}
+  addUserKnob {18 Weight}
+  Weight {0.3 0.59 0.11}
+  addUserKnob {6 Weight_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+ }
+ Dot {
+  name Dot32
+  note_font_size 40
+  xpos -427
+  ypos 1993
+ }
+push $Nac3bd560
+ Switch {
+  inputs 15
+  which {{parent.MASTERSWITCH.QC}}
+  name Switch6
+  xpos -600
+  ypos 3791
+  hide_input true
+ }
+ NoOp {
+  name MASTERSWITCH
+  xpos -600
+  ypos 3991
+  addUserKnob {20 User}
+  addUserKnob {68 QC M {Comp Monochrome LogSat Log Saturation Mirror Measure Highlights Sharpen Grain Difference "Check Edges" "Negative Values" "Inf Values" "NaN Values" "" "" "" "" "" "" ""}}
+  QC "Check Edges"
+ }
+ Grade {
+  multiply {{pow(2,stops)} {pow(2,stops)} {pow(2,stops)} {pow(2,stops)}}
+  multiply_panelDropped true
+  black_clamp false
+  name Grade_In_Stops
+  label "\nExposure (\[value stops])"
+  note_font "Bitstream Vera Sans"
+  xpos -600
+  ypos 4179
+  addUserKnob {20 Stops}
+  addUserKnob {7 stops R -5 5}
+ }
+ Output {
+  name Output1
+  xpos -600
+  ypos 4551
+ }
+ NoOp {
+  inputs 0
+  name THIS_SWITCH
+  xpos -740
+  ypos 151
+  addUserKnob {20 User}
+  addUserKnob {4 View M {Comp Plate "" ""}}
+  View Plate
+ }
+ NoOp {
+  inputs 0
+  name GRAINSWITCH
+  xpos 2480
+  ypos 2551
+  addUserKnob {20 User}
+  addUserKnob {4 GrainType M {Type1 Type2 Type3}}
+  GrainType Type2
+  addUserKnob {6 GrainColour +STARTLINE}
+  GrainColour true
+ }
+end_group
+
+
+
