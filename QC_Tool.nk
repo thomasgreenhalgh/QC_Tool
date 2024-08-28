@@ -3,492 +3,776 @@ version 14.0 v5
 push $cut_paste_input
 Group {
  name TECH_TOOL
+ updateUI "import nuke\n\ndef update_divide_visibility():\n	node = nuke.thisNode()\n	node.begin()\n	master_switch = nuke.toNode('MASTERSWITCH')\n\n	if master_switch:\n    	qc_value = master_switch.knob('QC').value()\n    	node.end()\n\n\n    	visibility_map = \{\n        	\"Increment\": \"divide\",\n        	\"Mask\": \"divide2\",\n        	\"Golden\": \"divide3\"\n    	\}\n\n\n    	for value, knob_name in visibility_map.items():\n        	node.knob(knob_name).setVisible(qc_value == value)\n        	\n	else:\n    	node.end()\n\nupdate_divide_visibility()\n"
  tile_color 0x282828ff
  gl_color 0x2a2a2aff
  label "\n\n\n\n<i>\[knob QC]\n"
  note_font "DejaVu Sans Bold Italic"
  note_font_color 0xf2c47fff
  selected true
- xpos -516
- ypos 1851
+ xpos -225
+ ypos -75
  addUserKnob {20 User l -}
  addUserKnob {26 txt l "" +STARTLINE T "<b><font size=\"40\"><font color=\"#BAA655\">QC</font></b>"}
  addUserKnob {26 ""}
- addUserKnob {22 Push l "<font color=\"#BAA655\">Set Input Viewer</font>" -STARTLINE T "import nuke\n\ndef toggle_active_viewer_input():\n    # Get the active viewer node\n    active_viewer = nuke.activeViewer()\n    \n    if active_viewer is not None:\n        # Get the viewer node\n        viewer_node = active_viewer.node()\n        \n        # Access the input_process_node knob\n        input_process_knob = viewer_node\['input_process_node']\n        \n        # Toggle the value of the input process node\n        if input_process_knob.value() == 'VIEWER_INPUT':\n            input_process_knob.setValue('TECH_TOOL')\n        else:\n            input_process_knob.setValue('VIEWER_INPUT')\n    else:\n        nuke.message(\"No active viewer found.\")\n\ntoggle_active_viewer_input()"}
+ addUserKnob {22 Push l "<font color=\"#BAA655\">Set Input Viewer</font>" -STARTLINE T "import nuke\n\ndef toggle_active_viewer_input():\n	# Get the active viewer node\n	active_viewer = nuke.activeViewer()\n	\n	if active_viewer is not None:\n    	# Get the viewer node\n    	viewer_node = active_viewer.node()\n    	\n    	# Access the input_process_node knob\n    	input_process_knob = viewer_node\['input_process_node']\n    	\n    	# Toggle the value of the input process node\n    	if input_process_knob.value() == 'VIEWER_INPUT':\n        	input_process_knob.setValue('TECH_TOOL')\n    	else:\n        	input_process_knob.setValue('VIEWER_INPUT')\n	else:\n    	nuke.message(\"No active viewer found.\")\n\ntoggle_active_viewer_input()\n"}
  addUserKnob {26 ""}
- addUserKnob {41 View l "<font color=\"#BAA655\">Input View" T THIS_SWITCH.View}
  addUserKnob {41 QC l "<font color=\"#BAA655\">Operation" T MASTERSWITCH.QC}
  addUserKnob {26 ""}
- addUserKnob {41 stops l "<font color=\"#BAA655\">Exp Stops" T Grade_In_Stops.stops}
- addUserKnob {41 GrainType l "<font color=\"#BAA655\">Grain Type" T GRAINSWITCH.GrainType}
+ addUserKnob {20 divide l "" +STARTLINE +HIDDEN n 1}
+ addUserKnob {41 increment l "<font color=\"#BAA655\">Increment" T FrameHold1.increment}
+ addUserKnob {20 endGroup n -1}
+ addUserKnob {20 divide2 l "" +STARTLINE +HIDDEN n 1}
+ addUserKnob {41 aspect_selection l "<font color=\"#BAA655\">Aspect" T Group3.aspect_selection}
+ addUserKnob {20 endGroup_1 n -1}
+ addUserKnob {20 divide3 l "" +STARTLINE +HIDDEN n 1}
+ addUserKnob {41 flip_1 l "vertical (flip)" T Mirror2_3.flip}
+ addUserKnob {41 flop_1 l "horizontal (flop)" -STARTLINE T Mirror2_3.flop}
+ addUserKnob {20 endGroup_2 n -1}
+ addUserKnob {26 ""}
+ addUserKnob {41 red l "<font color=\"#BAA655\">Exposure" T Exposure1.red}
+ addUserKnob {22 setExp l "<font color=\"#BAA655\">Set Exposure" -STARTLINE T "nuke.thisNode()\[\"red\"].setValue(0)"}
+ addUserKnob {41 value l "<font color=\"#BAA655\">Gamma" T Gamma1.value}
+ addUserKnob {22 setGamma l "<font color=\"#BAA655\">Set Gamma" -STARTLINE T "nuke.thisNode()\[\"value\"].setValue(1)"}
+ addUserKnob {41 saturation l "<font color=\"#BAA655\">Saturation" T Saturation3.saturation}
+ addUserKnob {22 setSaturation l "<font color=\"#BAA655\">Set Saturation" -STARTLINE T "nuke.thisNode()\[\"saturation\"].setValue(1)\n"}
+ addUserKnob {41 flip l Flip T Mirror2_1.flip}
+ addUserKnob {41 flop l Flop -STARTLINE T Mirror2_1.flop}
  addUserKnob {26 ""}
  addUserKnob {26 txt2 l "" +STARTLINE T "<div style=\"text-align: left; font-size: 10px; color: #666666; font-style: italic;\">\n  v 1.1 : 2019-02\n</div>"}
+ addUserKnob {26 Secret l "" +STARTLINE +INVISIBLE T "script = '''\n\nif nuke.thisKnob().name() == \"QC\":\n	addKnobs()\n\ndef addKnobs:\n\n	\n\n\nnuke.selectedNode().knob('knobChanged').setValue(script)"}
 }
  Input {
   inputs 0
+  name InputCOMP
+  xpos -590
+  ypos -10
+ }
+ Shuffle {
+  alpha black
+  name Shuffle2
+  xpos -590
+  ypos 54
+ }
+ Dot {
+  name Dot1
+  note_font_size 40
+  xpos -556
+  ypos 186
+ }
+ Dot {
+  name Dot31
+  note_font_size 40
+  xpos -556
+  ypos 890
+ }
+set Nfa799c0 [stack 0]
+ Dot {
+  name Dot30
+  note_font_size 40
+  xpos -446
+  ypos 890
+ }
+set Nfa7ea60 [stack 0]
+ Dot {
+  name Dot28
+  note_font_size 40
+  xpos -336
+  ypos 890
+ }
+set Nfa83b00 [stack 0]
+ Dot {
+  name Dot27
+  note_font_size 40
+  xpos -116
+  ypos 890
+ }
+set Nfa88c10 [stack 0]
+ Dot {
+  name Dot26
+  note_font_size 40
+  xpos -6
+  ypos 890
+ }
+set Nfa8dcd0 [stack 0]
+ Dot {
+  name Dot25
+  note_font_size 40
+  xpos 104
+  ypos 890
+ }
+set Nfa92d90 [stack 0]
+ Dot {
+  name Dot24
+  note_font_size 40
+  xpos 324
+  ypos 890
+ }
+set Nfa97f50 [stack 0]
+ Dot {
+  name Dot22
+  note_font_size 40
+  xpos 434
+  ypos 890
+ }
+set Nfa9cf60 [stack 0]
+ Dot {
+  name Dot21
+  note_font_size 40
+  xpos 544
+  ypos 890
+ }
+set Nfaa2020 [stack 0]
+ Dot {
+  name Dot20
+  note_font_size 40
+  xpos 1534
+  ypos 890
+ }
+set Nfaa70e0 [stack 0]
+ Dot {
+  name Dot19
+  note_font_size 40
+  xpos 2084
+  ypos 890
+ }
+set Nfaac1a0 [stack 0]
+ Dot {
+  name Dot18
+  note_font_size 40
+  xpos 2964
+  ypos 890
+ }
+set Nfab1260 [stack 0]
+ Dot {
+  name Dot6
+  note_font_size 40
+  xpos 4504
+  ypos 890
+ }
+set Nfab6320 [stack 0]
+ Dot {
+  name Dot7
+  note_font_size 40
+  xpos 4724
+  ypos 890
+ }
+set N10d1ceb0 [stack 0]
+ Dot {
+  name Dot11
+  xpos 5164
+  ypos 890
+ }
+ Dot {
+  name Dot12
+  xpos 5164
+  ypos 1338
+ }
+set N10d27020 [stack 0]
+ Expression {
+  temp_name0 W
+  temp_expr0 3
+  channel0 rgba
+  expr0 "(abs(x - width/1.2) <= W || abs(x - width*(1 - 1/3)) <= W|| abs(x - width*(1 - 1/4.5)) <= W|| abs(y - height/2.4) <= W || abs(y - height/3) <= W || abs(y - height*(1 - 1/1.4)) <= W) ? 1 : 0"
+  channel1 none
+  channel2 none
+  name Expression9
+  label "GOLDEN RATIO"
+  xpos 5850
+  ypos 1454
+ }
+ Mirror2 {
+  name Mirror2_3
+  xpos 5850
+  ypos 1486
+ }
+push $N10d27020
+ Merge2 {
+  inputs 2
+  name Merge9
+  xpos 5845
+  ypos 1509
+ }
+push $N10d27020
+ Expression {
+  temp_name0 W
+  temp_expr0 3
+  channel0 rgba
+  expr0 "(abs(y - (height - (height/width) * x)) <= W || abs(y - (height - (height/width) * (width - x))) <= W) ? 1 : 0"
+  channel1 none
+  channel2 none
+  name Expression8
+  label "DIAGONAL LINES"
+  xpos 5758
+  ypos 1456
+ }
+push $N10d27020
+ Merge2 {
+  inputs 2
+  name Merge8
+  xpos 5740
+  ypos 1508
+ }
+push $N10d27020
+ Expression {
+  temp_name0 W
+  temp_expr0 3
+  channel0 rgba
+  expr0 "(abs(x - width/3) <= W || abs(x - width/2) <= W || abs(x - 2*width/3) <= W) ? 1 : 0"
+  channel1 none
+  channel2 none
+  name Expression7
+  label "RULE OF ODDS"
+  xpos 5663
+  ypos 1454
+ }
+push $N10d27020
+ Merge2 {
+  inputs 2
+  name Merge7
+  xpos 5646
+  ypos 1511
+ }
+push $N10d27020
+ Expression {
+  temp_name0 W
+  temp_expr0 3
+  channel0 rgba
+  expr0 "(abs(x - width/1.61803398875) <= W|| abs(x - width*(1 - 1/1.61803398875)) <= W|| abs(y - height/1.61803398875) <= W || abs(y - height*(1 - 1/1.61803398875)) <= W) ? 1 : 0"
+  channel1 none
+  channel2 none
+  name Expression5
+  xpos 5564
+  ypos 1461
+ }
+push $N10d27020
+ Merge2 {
+  inputs 2
+  name Merge6
+  xpos 5532
+  ypos 1511
+ }
+push $N10d27020
+ Expression {
+  temp_name0 W
+  temp_expr0 3
+  channel0 rgba
+  expr0 "(abs(x - width/3) <= W || abs(x - 2*width/3) <= W || abs(y - height/3) <= W || abs(y - 2*height/3) <= W) ? 1: 0"
+  channel1 none
+  channel2 none
+  name Expression1
+  label "RULE OF THIRDS"
+  xpos 5460
+  ypos 1454
+ }
+push $N10d27020
+ Merge2 {
+  inputs 2
+  name Merge5
+  xpos 5436
+  ypos 1510
+ }
+push $N10d27020
+ Expression {
+  temp_name0 W
+  temp_expr0 3
+  channel0 rgba
+  expr0 "(abs(y - width/3.5) <= W || abs(x - width/2) <= W) ? 1 : 0"
+  channel1 none
+  channel2 none
+  name Expression6
+  label CENTRE
+  xpos 5359
+  ypos 1455
+ }
+push $N10d27020
+ Merge2 {
+  inputs 2
+  name Merge3
+  xpos 5332
+  ypos 1511
+ }
+push $N10d27020
+ Group {
+  name Group3
+  help "@b;dGuides v1@n; for Nuke 5.2v1\n\nDraws safe and aspect guides. Can also be used as a VIWER_INPUT\n\nCreated by Diogo Girondi\ndiogogirondi@gmail.com"
+  knobChanged "\nn = nuke.thisNode()\nk = nuke.thisKnob()\n\nif k.name() == \"aspect_selection\" or k.name() == \"showPanel\":\n	val1 = n\['aspect_selection'].vect().pop()\n	if val1 != 23:\n    	n\['aspect_custom'].setVisible( False )\n	else:\n    	n\['aspect_custom'].setVisible( True )\n\nif k.name() == \"draw_arguide\" or k.name() == \"showPanel\":\n	val2 = n\['draw_arguide'].vect().pop()\n	if val2 == 0:\n    	n\['arguide_color_mode'].setEnabled( False )\n    	n\['arguide_color'].setEnabled( False )\n    	n\['arguide_label_mode'].setEnabled( False )\n    	n\['arguide_label'].setEnabled( False )\n	else:\n    	n\['arguide_color_mode'].setEnabled( True )\n    	n\['arguide_color'].setEnabled( True )\n    	n\['arguide_label_mode'].setEnabled( True )\n    	n\['arguide_label'].setEnabled( True )\n\nif k.name() == \"draw_aspectmask\" or k.name() == \"showPanel\":\n	val3 = n\['draw_aspectmask'].vect().pop()\n	if val3 == 0:\n    	n\['aspectmask_mix'].setEnabled( False )\n    	n\['aspectmask_color'].setEnabled( False )\n	else:\n    	n\['aspectmask_mix'].setEnabled( True )\n    	n\['aspectmask_color'].setEnabled( True )\n\nif k.name() == \"draw_actionsafe\" or k.name() == \"showPanel\":\n	val4 = n\['draw_actionsafe'].vect().pop()\n	if val4 == 0:\n    	n\['actionsafe_size'].setVisible( True )\n    	n\['actionsafe_size'].setEnabled( False )\n    	n\['actionsafe_color_mode'].setEnabled( False )\n    	n\['actionsafe_color'].setEnabled( False )\n    	n\['actionsafe_label_mode'].setEnabled( False )\n    	n\['actionsafe_label'].setEnabled( False )\n    	n\['actionsafe_sizel'].setVisible( False )\n    	n\['actionsafe_sizer'].setVisible( False )\n    	n\['actionsafe_sizet'].setVisible( False )\n    	n\['actionsafe_sizeb'].setVisible( False )\n	elif val4 == 1:\n    	n\['actionsafe_size'].setVisible( True )\n    	n\['actionsafe_size'].setEnabled( True )\n    	n\['actionsafe_color_mode'].setEnabled( True )\n    	n\['actionsafe_color'].setEnabled( True )\n    	n\['actionsafe_label_mode'].setEnabled( True )\n    	n\['actionsafe_label'].setEnabled( True )\n    	n\['actionsafe_sizel'].setVisible( False )\n    	n\['actionsafe_sizer'].setVisible( False )\n    	n\['actionsafe_sizet'].setVisible( False )\n    	n\['actionsafe_sizeb'].setVisible( False )\n	else:\n    	n\['actionsafe_size'].setVisible( False )\n    	n\['actionsafe_size'].setEnabled( False )\n    	n\['actionsafe_color_mode'].setEnabled( True )\n    	n\['actionsafe_color'].setEnabled( True )\n    	n\['actionsafe_label_mode'].setEnabled( True )\n    	n\['actionsafe_label'].setEnabled( True )\n    	n\['actionsafe_sizel'].setVisible( True )\n    	n\['actionsafe_sizer'].setVisible( True )\n    	n\['actionsafe_sizet'].setVisible( True )\n    	n\['actionsafe_sizeb'].setVisible( True )\n\nif k.name() == \"draw_titlesafe\" or k.name() == \"showPanel\":\n	val5 = n\['draw_titlesafe'].vect().pop()\n	if val5 == 0:\n    	n\['titlesafe_size'].setVisible( True )\n    	n\['titlesafe_size'].setEnabled( False )\n    	n\['titlesafe_color_mode'].setEnabled( False )\n    	n\['titlesafe_color'].setEnabled( False )\n    	n\['titlesafe_label_mode'].setEnabled( False )\n    	n\['titlesafe_label'].setEnabled( False )\n    	n\['titlesafe_sizel'].setVisible( False )\n    	n\['titlesafe_sizer'].setVisible( False )\n    	n\['titlesafe_sizet'].setVisible( False )\n    	n\['titlesafe_sizeb'].setVisible( False )\n	elif val5 == 1:\n    	n\['titlesafe_size'].setVisible( True )\n    	n\['titlesafe_size'].setEnabled( True )\n    	n\['titlesafe_color_mode'].setEnabled( True )\n    	n\['titlesafe_color'].setEnabled( True )\n    	n\['titlesafe_label_mode'].setEnabled( True )\n    	n\['titlesafe_label'].setEnabled( True )\n    	n\['titlesafe_sizel'].setVisible( False )\n    	n\['titlesafe_sizer'].setVisible( False )\n    	n\['titlesafe_sizet'].setVisible( False )\n    	n\['titlesafe_sizeb'].setVisible( False )\n	else:\n    	n\['titlesafe_size'].setVisible( False )\n    	n\['titlesafe_size'].setEnabled( False )\n    	n\['titlesafe_color_mode'].setEnabled( True )\n    	n\['titlesafe_color'].setEnabled( True )\n    	n\['titlesafe_label_mode'].setEnabled( True )\n    	n\['titlesafe_label'].setEnabled( True )\n    	n\['titlesafe_sizel'].setVisible( True )\n    	n\['titlesafe_sizer'].setVisible( True )\n    	n\['titlesafe_sizet'].setVisible( True )\n    	n\['titlesafe_sizeb'].setVisible( True )\n\nif k.name() == \"arguide_color_mode\" or k.name() == \"showPanel\":\n	val6 = n\['arguide_color_mode'].vect().pop()\n	if val6 == 0:\n    	n\['arguide_color'].setEnabled( False )\n	else:\n    	n\['arguide_color'].setEnabled( True )\n\nif k.name() == \"actionsafe_color_mode\" or k.name() == \"showPanel\":\n	val7 = n\['actionsafe_color_mode'].vect().pop()\n	if val7 == 0:\n    	n\['actionsafe_color'].setEnabled( False )\n	else:\n    	n\['actionsafe_color'].setEnabled( True )\n\nif k.name() == \"titlesafe_color_mode\" or k.name() == \"showPanel\":\n	val8 = n\['titlesafe_color_mode'].vect().pop()\n	if val8 == 0:\n    	n\['titlesafe_color'].setEnabled( False )\n	else:\n    	n\['titlesafe_color'].setEnabled( True )\n\nif k.name() == \"arguide_label_mode\" or k.name() == \"showPanel\":\n	val9 = n\['arguide_label_mode'].vect().pop()\n	if val9 == 0:\n    	n\['arguide_label'].setVisible( False )\n	elif val9 == 1:\n    	n\['arguide_label'].setVisible( False )\n	else:\n    	n\['arguide_label'].setVisible( True )\n\nif k.name() == \"actionsafe_label_mode\" or k.name() == \"showPanel\":\n	val10 = n\['actionsafe_label_mode'].vect().pop()\n	if val10 == 0:\n    	n\['actionsafe_label'].setVisible( False )\n	elif val10 == 1:\n    	n\['actionsafe_label'].setVisible( False )\n	else:\n    	n\['actionsafe_label'].setVisible( True )\n\nif k.name() == \"titlesafe_label_mode\" or k.name() == \"showPanel\":\n	val11 = n\['titlesafe_label_mode'].vect().pop()\n	if val11 == 0:\n    	n\['titlesafe_label'].setVisible( False )\n	elif val11 == 1:\n    	n\['titlesafe_label'].setVisible( False )\n	else:\n    	n\['titlesafe_label'].setVisible( True )\n"
+  tile_color 0x4573ffff
+  label "\[knob this.aspect_selection]"
+  note_font Helvetica
+  xpos 5130
+  ypos 1457
+  addUserKnob {20 guides l "dGuides v1"}
+  addUserKnob {26 tx_aspect l "@b;Aspect Ratio"}
+  addUserKnob {4 aspect_selection l Aspect t "\n" M {"Input   	" 1.00 1.19 1.25 1.33 1.35 1.37 1.43 1.50 1.56 1.60 1.66 1.75 1.778 1.85 2.00 2.20 2.35 2.40 2.55 2.59 2.76 4.00 Custom "" "" "" "" "" "" "" ""}}
+  aspect_selection 2.40
+  addUserKnob {7 aspect_custom l "" -STARTLINE +HIDDEN R 0.1 4}
+  aspect_custom 1
+  addUserKnob {7 offset l Offset t "Offets the aspect region in either X or Y according to the aspect ratio set." R -100 100}
+  addUserKnob {26 tx_arguide l "@b;Aspect Guide"}
+  addUserKnob {4 draw_arguide l "" -STARTLINE M {Off "Draw  	" "" "" "" "" "" ""}}
+  draw_arguide "Draw  	"
+  addUserKnob {4 arguide_color_mode l Color M {Global "Custom   " "" "" "" "" "" ""}}
+  arguide_color_mode "Custom   "
+  addUserKnob {18 arguide_color l "" -STARTLINE}
+  arguide_color {1 0.3 0}
+  addUserKnob {6 arguide_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {4 arguide_label_mode l Label M {Off Auto "Custom   "}}
+  arguide_label_mode Auto
+  addUserKnob {1 arguide_label l "" -STARTLINE +HIDDEN}
+  addUserKnob {26 tx_aspectmask l "@b;Aspect Mask"}
+  addUserKnob {4 draw_aspectmask l "" -STARTLINE M {Off "Draw  	" ""}}
+  addUserKnob {7 aspectmask_mix l Mix +DISABLED}
+  aspectmask_mix 0.5
+  addUserKnob {18 aspectmask_color l Color +DISABLED}
+  aspectmask_color {0 0 0}
+  addUserKnob {6 aspectmask_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {26 tx_action l "@b;Action Safe"}
+  addUserKnob {4 draw_actionsafe l "" -STARTLINE M {Off Draw "Split    	" "" "" "" "" "" ""}}
+  draw_actionsafe Draw
+  addUserKnob {7 actionsafe_size l Size R 0 50}
+  actionsafe_size 5
+  addUserKnob {7 actionsafe_sizel l L +HIDDEN R 0 100}
+  actionsafe_sizel 5
+  addUserKnob {7 actionsafe_sizer l R +HIDDEN R 0 100}
+  actionsafe_sizer 5
+  addUserKnob {7 actionsafe_sizet l T +HIDDEN R 0 100}
+  actionsafe_sizet 5
+  addUserKnob {7 actionsafe_sizeb l B +HIDDEN R 0 100}
+  actionsafe_sizeb 5
+  addUserKnob {4 actionsafe_color_mode l Color M {Global "Custom   " ""}}
+  actionsafe_color_mode "Custom   "
+  addUserKnob {18 actionsafe_color l "" -STARTLINE}
+  actionsafe_color {1 0 0.3}
+  addUserKnob {6 actionsafe_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {4 actionsafe_label_mode l Label M {Off Auto "Custom   " ""}}
+  actionsafe_label_mode Auto
+  addUserKnob {1 actionsafe_label l "" -STARTLINE +HIDDEN}
+  addUserKnob {26 tx_title l "@b;Title Safe"}
+  addUserKnob {4 draw_titlesafe l "" -STARTLINE M {Off Draw "Split    	" "" "" ""}}
+  draw_titlesafe Draw
+  addUserKnob {7 titlesafe_size l Size R 0 50}
+  titlesafe_size 10
+  addUserKnob {7 titlesafe_sizel l L +HIDDEN R 0 100}
+  titlesafe_sizel 10
+  addUserKnob {7 titlesafe_sizer l R +HIDDEN R 0 100}
+  titlesafe_sizer 10
+  addUserKnob {7 titlesafe_sizet l T +HIDDEN R 0 100}
+  titlesafe_sizet 10
+  addUserKnob {7 titlesafe_sizeb l B +HIDDEN R 0 100}
+  titlesafe_sizeb 10
+  addUserKnob {4 titlesafe_color_mode l Color M {Global "Custom   "}}
+  titlesafe_color_mode "Custom   "
+  addUserKnob {18 titlesafe_color l "" -STARTLINE}
+  titlesafe_color {0 0.5 0.5}
+  addUserKnob {6 titlesafe_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {4 titlesafe_label_mode l Label M {Off Auto "Custom   "}}
+  titlesafe_label_mode Auto
+  addUserKnob {1 titlesafe_label l "" -STARTLINE +HIDDEN}
+  addUserKnob {20 options l Options}
+  addUserKnob {26 tx_global l "@b;Global"}
+  addUserKnob {18 global_color l Color}
+  global_color {0.2 0.6 1}
+  addUserKnob {6 global_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {7 line l "Line Thickness" R 1 10}
+  line 5
+  addUserKnob {26 ""}
+  addUserKnob {2 font l Font t "Use a knobDefault() in your menu.py to set this knob value to a standard font on your system."}
+  font "\[python nuke.defaultFontPathname()]"
+  addUserKnob {7 fontscale l Scale R 1 10}
+  fontscale 1
+ }
+  Input {
+   inputs 0
+   name Input
+   xpos -61
+   ypos -71
+  }
+set N10e206a0 [stack 0]
+  Dot {
+   name Dot5
+   xpos 803
+   ypos -66
+  }
+  Dot {
+   name Dot6
+   xpos 803
+   ypos 560
+  }
+push $N10e206a0
+  NoOp {
+   name calc
+   tile_color 0xff1663ff
+   gl_color 0xff1663ff
+   xpos -61
+   ypos -4
+   addUserKnob {20 User l "Do the Math"}
+   addUserKnob {7 ar_input}
+   ar_input {{"( width * pixel_aspect ) / height" i}}
+   addUserKnob {7 ar_custom R 0 4}
+   ar_custom {{"parent.aspect_selection == 0 ? ( width * pixel_aspect ) / height : parent.aspect_selection == 23 ? parent.aspect_custom : \[value parent.aspect_selection]" i}}
+   addUserKnob {7 line R 0 10}
+   line {{"parent.line < 1 ? 1 : parent.line / 2" i}}
+   addUserKnob {7 font_size R 1 100}
+   font_size {{"input.format.w * 0.015" i}}
+   addUserKnob {15 action_size}
+   action_size {{"parent.draw_actionsafe == 2 ? ( parent.actionsafe_sizel / 100 ) : ( parent.actionsafe_size / 100 )" i} {"parent.draw_actionsafe == 2 ? ( parent.actionsafe_sizeb / 100 ) : ( parent.actionsafe_size / 100 )" i} {"parent.draw_actionsafe == 2 ? ( parent.actionsafe_sizer / 100 ) : ( parent.actionsafe_size / 100 )" i} {"parent.draw_actionsafe == 2 ? ( parent.actionsafe_sizet/ 100 ) : ( parent.actionsafe_size / 100 )" i}}
+   addUserKnob {15 title_size}
+   title_size {{"parent.draw_titlesafe == 2 ? ( parent.titlesafe_sizel / 100 ) : ( parent.titlesafe_size / 100 )" i} {"parent.draw_titlesafe == 2 ? ( parent.titlesafe_sizeb / 100 ) : ( parent.titlesafe_size / 100 )" i} {"parent.draw_titlesafe == 2 ? ( parent.titlesafe_sizer / 100 ) : ( parent.titlesafe_size / 100 )" i} {"parent.draw_titlesafe == 2 ? ( parent.titlesafe_sizet/ 100 ) : ( parent.titlesafe_size / 100 )" i}}
+   addUserKnob {6 ar_isbigger +STARTLINE}
+   ar_isbigger {{"ar_input >= ar_custom" i}}
+   addUserKnob {26 ""}
+   addUserKnob {12 ar_pos}
+   ar_pos {{"ar_isbigger ? parent.offset  * ( width / 100 ) : 0" i} {"ar_isbigger ? 0 : parent.offset  * ( height / 100 )" i}}
+   addUserKnob {15 ar_guide}
+   ar_guide {{"ar_custom > ar_input ? 0 + ar_pos.x :  ( ( width / 2 ) - ( ( ( height * ar_custom ) / pixel_aspect ) / 2 ) ) + ar_pos.x" i} {"ar_custom < ar_input ? 0 + ar_pos.y : ( ( height / 2 ) - ( ( ( width * pixel_aspect ) / ar_custom ) / 2 ) ) + ar_pos.y" i} {"ar_custom > ar_input ? width + ar_pos.x : ( ( width / 2 ) + ( ( ( height * ar_custom ) / pixel_aspect ) / 2 ) ) + ar_pos.x" i} {"ar_custom < ar_input ? height + ar_pos.y : ( ( height / 2 ) + ( ( ( width * pixel_aspect ) / ar_custom ) / 2 ) ) + ar_pos.y" i}}
+   addUserKnob {12 ar_area}
+   ar_area {{"ar_guide.r - ar_guide.x" i} {"ar_guide.t - ar_guide.y" i}}
+   addUserKnob {26 ""}
+   addUserKnob {15 action_guide}
+   action_guide {{"ar_guide.x + ( ar_area.x * action_size.x )" i} {"ar_guide.y + ( ar_area.y * action_size.y )" i} {"ar_guide.r - ( ar_area.x * action_size.r )" i} {"ar_guide.t - ( ar_area.y * action_size.t )" i}}
+   addUserKnob {12 action_area}
+   action_area {{"action_guide.r - action_guide.x" i} {"action_guide.t - action_guide.y" i}}
+   addUserKnob {15 action_h}
+   action_h {{action_guide.x i} {"action_guide.y + ( action_area.y / 2 )" i} {action_guide.r i} {"action_guide.t - ( action_area.y / 2 )" i}}
+   addUserKnob {15 action_v}
+   action_v {{"action_guide.x + ( action_area.x / 2 )" i} {action_guide.y i} {"action_guide.r - ( action_area.x / 2 )" i} {action_guide.t i}}
+   addUserKnob {26 ""}
+   addUserKnob {15 title_guide}
+   title_guide {{"ar_guide.x + ( ar_area.x * title_size.x )" i} {"ar_guide.y + ( ar_area.y * title_size.y )" i} {"ar_guide.r - ( ar_area.x * title_size.r )" i} {"ar_guide.t - ( ar_area.y * title_size.t )" i}}
+   addUserKnob {12 title_area}
+   title_area {{"title_guide.r - title_guide.x" i} {"title_guide.t - title_guide.y" i}}
+   addUserKnob {15 title_h}
+   title_h {{title_guide.x i} {"title_guide.y + ( title_area.y / 2 )" i} {title_guide.r i} {"title_guide.t - ( title_area.y / 2 )" i}}
+   addUserKnob {15 title_v}
+   title_v {{"title_guide.x + ( title_area.x / 2 )" i} {title_guide.y i} {"title_guide.r - ( title_area.x / 2 )" i} {title_guide.t i}}
+  }
+set N10e2f550 [stack 0]
+  Rectangle {
+   replace true
+   area {{"ceil( calc.title_guide.x - calc.line )" i} {"ceil( calc.title_guide.y - calc.line )" i} {"ceil( calc.title_guide.r + calc.line )" i} {"ceil( calc.title_guide.t + calc.line )" i}}
+   color {{"parent.titlesafe_color_mode == 0 ? parent.global_color.r : parent.titlesafe_color.r" i} {"parent.titlesafe_color_mode == 0 ? parent.global_color.g : parent.titlesafe_color.g" i} {"parent.titlesafe_color_mode == 0 ? parent.global_color.b : parent.titlesafe_color.b" i} 1}
+   name Title_Outer
+   tile_color 0x8080ff
+   xpos 604
+   ypos 100
+  }
+  Rectangle {
+   area {{"ceil( calc.title_guide.x + calc.line )" i} {"ceil( calc.title_guide.y + calc.line )" i} {"ceil( calc.title_guide.r - calc.line )" i} {"ceil( calc.title_guide.t - calc.line )" i}}
+   color 0
+   name Title_Inner
+   tile_color 0x8080ff
+   xpos 604
+   ypos 129
+  }
+set N10e51a50 [stack 0]
+  Rectangle {
+   replace true
+   area {{input.area.x i} {"( ( input.area.y + input.area.t ) / 2 ) - calc.line" i} {input.area.r i} {"( ( input.area.y + input.area.t ) / 2 ) + calc.line" i}}
+   color {{"parent.titlesafe_color_mode == 0 ? parent.global_color.r : parent.titlesafe_color.r" i} {"parent.titlesafe_color_mode == 0 ? parent.global_color.g : parent.titlesafe_color.g" i} {"parent.titlesafe_color_mode == 0 ? parent.global_color.b : parent.titlesafe_color.b" i} 1}
+   name TCenter_H
+   tile_color 0x8080ff
+   xpos 667
+   ypos 174
+  }
+  Rectangle {
+   area {{"( ( Title_Inner.area.x + Title_Inner.area.r ) / 2 ) - calc.line" i} {Title_Inner.area.y i} {"( ( Title_Inner.area.r + Title_Inner.area.x ) / 2 ) + calc.line" i} {Title_Inner.area.t i}}
+   color {{"parent.titlesafe_color_mode == 0 ? parent.global_color.r : parent.titlesafe_color.r" i} {"parent.titlesafe_color_mode == 0 ? parent.global_color.g : parent.titlesafe_color.g" i} {"parent.titlesafe_color_mode == 0 ? parent.global_color.b : parent.titlesafe_color.b" i} 1}
+   name TCenter_V
+   tile_color 0x8080ff
+   xpos 667
+   ypos 203
+  }
+  Rectangle {
+   invert true
+   area {{"( ( Title_Inner.area.x + Title_Inner.area.r ) / 2 ) - ( ( Title_Inner.area.t - Title_Inner.area.y ) < ( Title_Inner.area.r - Title_Inner.area.x ) ? ( ( Title_Inner.area.t - Title_Inner.area.y ) * 0.1 ) : ( ( Title_Inner.area.r - Title_Inner.area.x ) * 0.1 ) )" i} {"( ( Title_Inner.area.y + Title_Inner.area.t ) / 2 ) - ( ( Title_Inner.area.t - Title_Inner.area.y ) < ( Title_Inner.area.r - Title_Inner.area.x ) ? ( ( Title_Inner.area.t - Title_Inner.area.y ) * 0.1 ) : ( ( Title_Inner.area.r - Title_Inner.area.x ) * 0.1 ) )" i} {"( ( Title_Inner.area.r + Title_Inner.area.x ) / 2 ) + ( ( Title_Inner.area.t - Title_Inner.area.y ) < ( Title_Inner.area.r - Title_Inner.area.x ) ? ( ( Title_Inner.area.t - Title_Inner.area.y ) * 0.1 ) : ( ( Title_Inner.area.r - Title_Inner.area.x ) * 0.1 ) )" i} {"( ( Title_Inner.area.t + Title_Inner.area.y ) / 2 ) + ( ( Title_Inner.area.t - Title_Inner.area.y ) < ( Title_Inner.area.r - Title_Inner.area.x ) ? ( ( Title_Inner.area.t - Title_Inner.area.y ) * 0.1 ) : ( ( Title_Inner.area.r - Title_Inner.area.x ) * 0.1 ) )" i}}
+   color 0
+   name HoldIn
+   tile_color 0x8080ff
+   xpos 667
+   ypos 232
+  }
+push $N10e51a50
+  Merge2 {
+   inputs 2
+   name Merge5
+   tile_color 0x8080ff
+   xpos 604
+   ypos 282
+  }
+  Text {
+   message "\[if \[string compare \[value parent.titlesafe_label_mode] Auto ] \{return \[value parent.titlesafe_label]\} else \{return \"Title Safe\"\}]"
+   font "\[value parent.font]"
+   size {{"int( calc.font_size * parent.fontscale )" i}}
+   yjustify bottom
+   Transform 1
+   translate {{"calc.title_guide.x + 30" i} {"calc.title_guide.y + 5" i}}
+   color {{"parent.titlesafe_color_mode == 0 ? parent.global_color.r : parent.titlesafe_color.r" i} {"parent.titlesafe_color_mode == 0 ? parent.global_color.g : parent.titlesafe_color.g" i} {"parent.titlesafe_color_mode == 0 ? parent.global_color.b : parent.titlesafe_color.b" i} 1}
+   name Text1
+   tile_color 0x8080ff
+   xpos 604
+   ypos 311
+   disable {{"parent.titlesafe_label_mode == 0" i}}
+  }
+  Dot {
+   name Dot1
+   xpos 638
+   ypos 478
+  }
+push $N10e2f550
+  Rectangle {
+   replace true
+   area {{"ceil( calc.action_guide.x - calc.line )" i} {"ceil( calc.action_guide.y - calc.line )" i} {"ceil( calc.action_guide.r + calc.line )" i} {"ceil( calc.action_guide.t + calc.line )" i}}
+   color {{"parent.actionsafe_color_mode == 0 ? parent.global_color.r : parent.actionsafe_color.r" i} {"parent.actionsafe_color_mode == 0 ? parent.global_color.g : parent.actionsafe_color.g" i} {"parent.actionsafe_color_mode == 0 ? parent.global_color.b : parent.actionsafe_color.b" i} 1}
+   name Action_Outer
+   tile_color 0xff0033ff
+   xpos 428
+   ypos 101
+  }
+  Rectangle {
+   area {{"ceil( calc.action_guide.x + calc.line )" i} {"ceil( calc.action_guide.y + calc.line )" i} {"ceil( calc.action_guide.r - calc.line )" i} {"ceil( calc.action_guide.t - calc.line )" i}}
+   color 0
+   name Action_Inner
+   tile_color 0xff0033ff
+   xpos 428
+   ypos 130
+  }
+  Rectangle {
+   area {{calc.action_h.x i} {"calc.action_h.y - calc.line" i} {calc.action_h.r i} {"calc.action_h.t + calc.line" i}}
+   color {{"parent.actionsafe_color_mode == 0 ? parent.global_color.r : parent.actionsafe_color.r" i} {"parent.actionsafe_color_mode == 0 ? parent.global_color.g : parent.actionsafe_color.g" i} {"parent.actionsafe_color_mode == 0 ? parent.global_color.b : parent.actionsafe_color.b" i} 1}
+   name ACenter_H
+   tile_color 0xff0033ff
+   xpos 428
+   ypos 159
+  }
+  Rectangle {
+   area {{"calc.action_v.x - calc.line" i} {calc.action_v.y i} {"calc.action_v.r + calc.line" i} {calc.action_v.t i}}
+   color {{"parent.actionsafe_color_mode == 0 ? parent.global_color.r : parent.actionsafe_color.r" i} {"parent.actionsafe_color_mode == 0 ? parent.global_color.g : parent.actionsafe_color.g" i} {"parent.actionsafe_color_mode == 0 ? parent.global_color.b : parent.actionsafe_color.b" i} 1}
+   name ACenter_V
+   tile_color 0xff0033ff
+   xpos 428
+   ypos 188
+  }
+  Rectangle {
+   area {{"ceil( calc.action_guide.x + ( calc.ar_area.x * 0.035 ) )" i} {"ceil( calc.action_guide.y + ( calc.ar_area.y * 0.035 ) )" i} {"ceil( calc.action_guide.r - ( calc.ar_area.x * 0.035 ) )" i} {"ceil( calc.action_guide.t - ( calc.ar_area.y * 0.035 ) )" i}}
+   color 0
+   name ACenter
+   tile_color 0xff0033ff
+   xpos 428
+   ypos 217
+  }
+  Text {
+   message "\[if \[string compare \[value parent.actionsafe_label_mode] Auto ] \{return \[value parent.actionsafe_label]\} else \{return \"Action Safe\"\}]"
+   font "\[value parent.font]"
+   size {{"int( calc.font_size * parent.fontscale )" i}}
+   yjustify bottom
+   Transform 1
+   translate {{"calc.action_guide.x + 30" i} {"calc.action_guide.y + 5" i}}
+   color {{"parent.actionsafe_color_mode == 0 ? parent.global_color.r : parent.actionsafe_color.r" i} {"parent.actionsafe_color_mode == 0 ? parent.global_color.g : parent.actionsafe_color.g" i} {"parent.actionsafe_color_mode == 0 ? parent.global_color.b : parent.actionsafe_color.b" i} 1}
+   name Text2
+   tile_color 0xff0033ff
+   xpos 428
+   ypos 246
+   disable {{"parent.actionsafe_label_mode == 0" i}}
+  }
+  Dot {
+   name Dot2
+   xpos 462
+   ypos 395
+  }
+push $N10e2f550
+  Rectangle {
+   replace true
+   area {{"ceil( calc.ar_guide.x == 0 ? calc.ar_guide.x : calc.ar_guide.x - calc.line )" i} {"ceil( calc.ar_guide.y == 0 ? calc.ar_guide.y : calc.ar_guide.y - calc.line )" i} {"ceil( calc.ar_guide.r == width ? calc.ar_guide.r : calc.ar_guide.r + calc.line )" i} {"ceil( calc.ar_guide.t == height ? calc.ar_guide.t : calc.ar_guide.t + calc.line )" i}}
+   color {{"parent.arguide_color_mode == 0 ? parent.global_color.r : parent.arguide_color.r" i} {"parent.arguide_color_mode == 0 ? parent.global_color.g : parent.arguide_color.g" i} {"parent.arguide_color_mode == 0 ? parent.global_color.b : parent.arguide_color.b" i} 1}
+   name AR_Outer
+   tile_color 0xff4c00ff
+   xpos 207
+   ypos 100
+  }
+  Rectangle {
+   area {{"ceil( calc.ar_guide.x == 0 ? calc.ar_guide.x : calc.ar_guide.x + calc.line )" i} {"ceil( calc.ar_guide.y == 0 ? calc.ar_guide.y : calc.ar_guide.y + calc.line )" i} {"ceil( calc.ar_guide.r == width ? calc.ar_guide.r : calc.ar_guide.r - calc.line )" i} {"ceil( calc.ar_guide.t == height ? calc.ar_guide.t : calc.ar_guide.t - calc.line )" i}}
+   color 0
+   name AR_Inner
+   tile_color 0xff4c00ff
+   xpos 207
+   ypos 129
+  }
+set N10f38d10 [stack 0]
+  Text {
+   message "\[value parent.arguide_label]"
+   font "\[value parent.font]"
+   size {{"int( calc.font_size * parent.fontscale )" i}}
+   yjustify bottom
+   Transform 1
+   translate {{"calc.ar_guide + ( width * 0.05 )" i} {"calc.ar_guide.t + 10" i}}
+   color {{"parent.arguide_color_mode == 0 ? parent.global_color.r : parent.arguide_color.r" i} {"parent.arguide_color_mode == 0 ? parent.global_color.g : parent.arguide_color.g" i} {"parent.arguide_color_mode == 0 ? parent.global_color.b : parent.arguide_color.b" i} 1}
+   name Tx_H_Label
+   tile_color 0xff4c00ff
+   xpos 155
+   ypos 180
+   disable {{calc.ar_isbigger i}}
+  }
+  Text {
+   message "\[value parent.arguide_label]"
+   font "\[value parent.font]"
+   size {{"int( calc.font_size * parent.fontscale )" i}}
+   xjustify center
+   yjustify bottom
+   Transform 1
+   translate {{"calc.ar_guide.x - 10" i} {"calc.ar_guide.y + ( calc.ar_area.y * 0.5 )" i}}
+   rotate 90
+   color {{"parent.arguide_color_mode == 0 ? parent.global_color.r : parent.arguide_color.r" i} {"parent.arguide_color_mode == 0 ? parent.global_color.g : parent.arguide_color.g" i} {"parent.arguide_color_mode == 0 ? parent.global_color.b : parent.arguide_color.b" i} 1}
+   name Tx_V_Label
+   tile_color 0xff4c00ff
+   xpos 155
+   ypos 209
+   disable {{!calc.ar_isbigger i}}
+  }
+push $N10f38d10
+  Text {
+   message "\[if \[string compare \[value parent.aspect_selection] Custom] \{return \[value parent.aspect_selection]:1\} else \{return \[value parent.aspect_custom]:1\}]"
+   font "\[value parent.font]"
+   size {{"int( calc.font_size * parent.fontscale )" i}}
+   yjustify bottom
+   Transform 1
+   translate {{"calc.ar_guide + ( width * 0.05 )" i} {"calc.ar_guide.t + 10" i}}
+   color {{"parent.arguide_color_mode == 0 ? parent.global_color.r : parent.arguide_color.r" i} {"parent.arguide_color_mode == 0 ? parent.global_color.g : parent.arguide_color.g" i} {"parent.arguide_color_mode == 0 ? parent.global_color.b : parent.arguide_color.b" i} 1}
+   name Tx_H_Auto
+   tile_color 0xff4c00ff
+   xpos 257
+   ypos 177
+   disable {{calc.ar_isbigger i}}
+  }
+  Text {
+   message "\[if \[string compare \[value parent.aspect_selection] Custom] \{return \[value parent.aspect_selection]:1\} else \{return \[value parent.aspect_custom]:1\}]"
+   font "\[value parent.font]"
+   size {{"int( calc.font_size * parent.fontscale )" i}}
+   xjustify center
+   yjustify bottom
+   Transform 1
+   translate {{"calc.ar_guide.x - 10" i} {"calc.ar_guide.y + ( calc.ar_area.y * 0.5 )" i}}
+   rotate 90
+   color {{"parent.arguide_color_mode == 0 ? parent.global_color.r : parent.arguide_color.r" i} {"parent.arguide_color_mode == 0 ? parent.global_color.g : parent.arguide_color.g" i} {"parent.arguide_color_mode == 0 ? parent.global_color.b : parent.arguide_color.b" i} 1}
+   name Tx_V_Auto
+   tile_color 0xff4c00ff
+   xpos 257
+   ypos 206
+   disable {{!calc.ar_isbigger i}}
+  }
+push $N10f38d10
+  Switch {
+   inputs 3
+   which {{parent.arguide_label_mode i}}
+   name Switch1
+   tile_color 0xff4c00ff
+   xpos 207
+   ypos 265
+  }
+  Dot {
+   name Dot3
+   xpos 241
+   ypos 321
+  }
+push $N10e2f550
+  Rectangle {
+   replace true
+   invert true
+   area {{"ceil( calc.ar_guide.x )" i} {"ceil( calc.ar_guide.y )" i} {"ceil( calc.ar_guide.r )" i} {"ceil( calc.ar_guide.t )" i}}
+   color {{parent.aspectmask_color.r i} {parent.aspectmask_color.g i} {parent.aspectmask_color.b i} 1}
+   name aspectmask
+   xpos 53
+   ypos 104
+  }
+  Dot {
+   name Dot4
+   xpos 87
+   ypos 169
+  }
+push $N10e2f550
+  Merge2 {
+   inputs 2
+   mix {{parent.aspectmask_mix i}}
+   name Merge4
+   xpos -61
+   ypos 164
+   disable {{"parent.aspectmask_mix == 0 || !parent.draw_aspectmask || parent.aspect_selection == 0" i}}
+  }
+  Merge2 {
+   inputs 2
+   name Merge3
+   xpos -61
+   ypos 316
+   disable {{"parent.draw_arguide == 0 || parent.aspect_selection == 0" i}}
+  }
+  Merge2 {
+   inputs 2
+   name Merge2
+   xpos -61
+   ypos 390
+   disable {{"parent.draw_actionsafe == 0" i}}
+  }
+  Merge2 {
+   inputs 2
+   name Merge1
+   xpos -61
+   ypos 473
+   disable {{"parent.draw_titlesafe == 0" i}}
+  }
+  ShuffleCopy {
+   inputs 2
+   name ShuffleCopy1
+   xpos -61
+   ypos 555
+  }
+  Output {
+   name Output1
+   xpos -61
+   ypos 618
+  }
+ end_group
+push $N10d1ceb0
+ Input {
+  inputs 0
   name InputPLATE
-  xpos 3740
-  ypos -9
+  xpos 3700
+  ypos -10
   number 1
  }
  Shuffle {
   alpha black
   name Shuffle1
-  xpos 3740
-  ypos 71
+  xpos 3700
+  ypos 54
  }
  Dot {
   name Dot84
   label PLATE
   note_font "Bitstream Vera Sans Bold"
   note_font_size 40
-  xpos 3773
-  ypos 153
+  xpos 3734
+  ypos 122
  }
-set Nad18b6e0 [stack 0]
- Input {
-  inputs 0
-  name InputCOMP
-  xpos -600
-  ypos -9
- }
- Shuffle {
-  alpha black
-  name Shuffle2
-  xpos -600
-  ypos 71
- }
- Switch {
-  inputs 2
-  which {{parent.THIS_SWITCH.View}}
-  name Switch1
-  xpos -600
-  ypos 151
- }
- Dot {
-  name Dot1
-  note_font_size 40
-  xpos -567
-  ypos 193
- }
- Dot {
-  name Dot31
-  note_font_size 40
-  xpos -567
-  ypos 913
- }
-set Nac3bd560 [stack 0]
- Dot {
-  name Dot30
-  note_font_size 40
-  xpos -427
-  ypos 913
- }
-set Nac3c2650 [stack 0]
- Dot {
-  name Dot28
-  note_font_size 40
-  xpos -287
-  ypos 913
- }
-set Nac3c7810 [stack 0]
- Dot {
-  name Dot27
-  note_font_size 40
-  xpos -147
-  ypos 913
- }
-set N28d29d70 [stack 0]
- Dot {
-  name Dot26
-  note_font_size 40
-  xpos -7
-  ypos 913
- }
-set N28d2ed90 [stack 0]
- Dot {
-  name Dot25
-  note_font_size 40
-  xpos 133
-  ypos 913
- }
-set N28d33e30 [stack 0]
- Dot {
-  name Dot24
-  note_font_size 40
-  xpos 273
-  ypos 913
- }
-set N28d38ef0 [stack 0]
- Dot {
-  name Dot23
-  note_font_size 40
-  xpos 413
-  ypos 913
- }
-set Nc464cd0 [stack 0]
- Dot {
-  name Dot22
-  note_font_size 40
-  xpos 553
-  ypos 913
- }
-set Nc469d90 [stack 0]
- Dot {
-  name Dot21
-  note_font_size 40
-  xpos 833
-  ypos 913
- }
-set Nc46ee50 [stack 0]
- Dot {
-  name Dot20
-  note_font_size 40
-  xpos 1533
-  ypos 913
- }
-set N71bcd080 [stack 0]
- Dot {
-  name Dot19
-  note_font_size 40
-  xpos 2093
-  ypos 913
- }
-set N71bd20d0 [stack 0]
- Dot {
-  name Dot18
-  note_font_size 40
-  xpos 2933
-  ypos 913
- }
-set N71bd7190 [stack 0]
- Dot {
-  name Dot6
-  note_font_size 40
-  xpos 4473
-  ypos 913
- }
-set N18bea820 [stack 0]
- Dot {
-  name Dot7
-  note_font_size 40
-  xpos 4753
-  ypos 913
- }
-set N18bef8e0 [stack 0]
- Dot {
-  name Dot17
-  note_font_size 40
-  xpos 5173
-  ypos 913
- }
-set N18bf49a0 [stack 0]
- Dot {
-  name Dot11
-  note_font_size 40
-  xpos 5733
-  ypos 913
- }
-set Nf50307d0 [stack 0]
- Dot {
-  name Dot12
-  note_font_size 40
-  xpos 5873
-  ypos 913
- }
-set Nf5035890 [stack 0]
- Dot {
-  name Dot13
-  note_font_size 40
-  xpos 6013
-  ypos 913
- }
-set Nf503a950 [stack 0]
- Dot {
-  name Dot14
-  note_font_size 40
-  xpos 6153
-  ypos 913
- }
-set N18b19690 [stack 0]
- Dot {
-  name Dot15
-  note_font_size 40
-  xpos 6853
-  ypos 913
- }
-set N18b1e730 [stack 0]
- Dot {
-  name Dot16
-  note_font_size 40
-  xpos 6993
-  ypos 913
- }
- Expression {
-  expr0 isnan(r)
-  expr1 isnan(g)
-  expr2 isnan(b)
-  expr3 isnan(r+g+b)
-  name Expression14
-  xpos 6960
-  ypos 1431
- }
- Expression {
-  expr0 clamp(r+g+b)
-  expr1 clamp(r+g+b)
-  expr2 clamp(r+g+b)
-  expr3 clamp(r+g+b)
-  name Expression15
-  xpos 6960
-  ypos 1471
- }
- Dot {
-  name Dot43
-  note_font_size 40
-  xpos 6993
-  ypos 2993
- }
-push $N18b1e730
- Expression {
-  temp_name0 zero
-  temp_expr0 "a>0?r <= 0 ? 1 : g <= 0 ?  1 : b <= 0 ? 1 :0:0"
-  temp_name1 max
-  temp_expr1 "r >= 14 ? 1 : g >= 14 ?  1 : b >= 14 ? 1 :0"
-  expr0 "isinf(r) ? 0 :zero?1:r*.05"
-  expr1 "isinf(g) ? 0 :max?1:g*.05"
-  expr2 "isinf(r) ? 1 : isinf(g) ?  1 :isinf(b) ? 1:isinf(r) ? 1 : isnan(g) ?  1 :isnan(b) ? 1:r*.05"
-  channel3 alpha
-  expr3 0
-  name expression1
-  xpos 6820
-  ypos 1431
- }
- Dot {
-  name Dot44
-  note_font_size 40
-  xpos 6853
-  ypos 2833
- }
-push $N18b19690
- Expression {
-  expr3 "b<0 ? 1:0"
-  name Expression12
-  xpos 6120
-  ypos 1431
- }
- Constant {
-  inputs 0
-  channels rgb
-  color {0 0 1 0}
-  name Constant38
-  xpos 6400
-  ypos 1927
- }
- Copy {
-  inputs 2
-  from0 rgba.alpha
-  to0 rgba.alpha
-  bbox A
-  name Copy21
-  xpos 6120
-  ypos 1945
- }
- Grade {
-  multiply 30
-  name Grade1
-  xpos 6120
-  ypos 1991
- }
- Premult {
-  name Premult28
-  xpos 6120
-  ypos 2031
- }
- Blur {
-  channels rgb
-  size 5.4
-  name Blur1
-  xpos 5980
-  ypos 2031
- }
-push $Nf503a950
- Expression {
-  expr3 "g<0 ? 1:0"
-  name Expression13
-  xpos 5980
-  ypos 1431
- }
- Constant {
-  inputs 0
-  channels rgb
-  color {0 1 0 0}
-  name Constant37
-  xpos 6400
-  ypos 1807
- }
- Copy {
-  inputs 2
-  from0 rgba.alpha
-  to0 rgba.alpha
-  bbox A
-  name Copy20
-  xpos 5980
-  ypos 1825
- }
- Grade {
-  multiply 30
-  name Grade2
-  xpos 5980
-  ypos 1871
- }
- Premult {
-  name Premult27
-  xpos 5980
-  ypos 1911
- }
- Blur {
-  channels rgb
-  size 5.4
-  name Blur2
-  xpos 5840
-  ypos 1911
- }
-push $Nf5035890
- Expression {
-  expr3 "r<0 ? 1:0"
-  name Expression1
-  xpos 5840
-  ypos 1431
- }
- Constant {
-  inputs 0
-  channels rgb
-  color {1 0 0 0}
-  name Constant36
-  xpos 6400
-  ypos 1687
- }
- Copy {
-  inputs 2
-  from0 rgba.alpha
-  to0 rgba.alpha
-  bbox A
-  name Copy19
-  xpos 5840
-  ypos 1705
- }
- Grade {
-  multiply 30
-  name Grade3
-  xpos 5840
-  ypos 1751
- }
- Premult {
-  name Premult26
-  xpos 5840
-  ypos 1791
- }
- Blur {
-  channels rgb
-  size 5.4
-  name Blur3
-  xpos 5840
-  ypos 1831
- }
-push $Nf50307d0
- Grade {
-  white 0.1
-  name Grade43
-  xpos 5700
-  ypos 1551
- }
- Merge2 {
-  inputs 2
-  bbox B
-  name Merge59
-  xpos 5700
-  ypos 1791
- }
- Merge2 {
-  inputs 2
-  bbox B
-  name Merge60
-  xpos 5700
-  ypos 1911
- }
- Merge2 {
-  inputs 2
-  bbox B
-  name Merge61
-  xpos 5700
-  ypos 2031
- }
- Dot {
-  name Dot90
-  note_font_size 40
-  xpos 5733
-  ypos 2193
- }
- Dot {
-  name Dot42
-  note_font_size 40
-  xpos 5733
-  ypos 2753
- }
-push $N18bf49a0
- Reformat {
-  type scale
-  scale {2 2}
-  filter impulse
-  name Reformat131
-  xpos 5140
-  ypos 1271
- }
- Tile {
-  rows 2
-  columns 2
-  filter impulse
-  name Tile3
-  xpos 5140
-  ypos 1351
- }
- Reformat {
-  type scale
-  scale {0.5 0.5}
-  resize none
-  filter impulse
-  name Reformat132
-  xpos 5140
-  ypos 1431
-  disable {{reformat_out-1}}
- }
- Dot {
-  name Dot45
-  note_font_size 40
-  xpos 5173
-  ypos 2193
- }
-push $N18bef8e0
-push $Nad18b6e0
+set N1102f240 [stack 0]
  Dot {
   name Dot8
   note_font_size 40
-  xpos 4893
-  ypos 153
+  xpos 4944
+  ypos 122
  }
  Dot {
   name Dot9
   note_font_size 40
-  xpos 4893
-  ypos 1473
+  xpos 4944
+  ypos 1466
  }
  Group {
   inputs 2
   name Common1
   tile_color 0x31593dff
   note_font_color 0xffff00ff
-  xpos 4720
-  ypos 1471
+  xpos 4690
+  ypos 1462
  }
   Input {
    inputs 0
@@ -557,29 +841,29 @@ push $Nad18b6e0
    tolerance 0.001
   }
  end_group
-set N49ac0fd0 [stack 0]
+set N110427c0 [stack 0]
  Dot {
   name Dot10
   note_font_size 40
-  xpos 4753
-  ypos 1553
+  xpos 4724
+  ypos 1530
  }
-push $N49ac0fd0
+push $N110427c0
  Constant {
   inputs 0
   channels rgb
   color {0.7636666298 0.01866666414 -0.05633336306 0}
   name Constant32
-  xpos 4300
-  ypos 1447
+  xpos 4250
+  ypos 1439
  }
-push $N18bea820
+push $Nfab6320
  Keymix {
   inputs 3
   mix 0.5
   name Keymix4
-  xpos 4440
-  ypos 1465
+  xpos 4470
+  ypos 1456
  }
  Merge2 {
   inputs 2
@@ -588,266 +872,205 @@ push $N18bea820
   Bchannels alpha
   output alpha
   name Merge1
-  xpos 4440
-  ypos 1545
+  xpos 4470
+  ypos 1520
  }
  Dot {
   name Dot29
   note_font_size 40
-  xpos 4473
-  ypos 2073
+  xpos 4504
+  ypos 2042
  }
  CheckerBoard2 {
   inputs 0
-  boxsize 78
+  boxsize 39
   centerlinewidth 0
-  name CheckerBoard1
-  xpos 1780
-  ypos 2167
+  name CheckerBoard3
+  xpos 1280
+  ypos 2143
  }
  Shuffle {
   alpha red
-  name Shuffle18
-  xpos 1780
-  ypos 2271
+  name Shuffle4
+  xpos 1280
+  ypos 2294
  }
  Grade {
   channels alpha
   blackpoint {0.1000000015 0.1000000015 0.1000000015 0.200000003}
   whitepoint {0.5 0.5 0.5 0.5}
-  name Grade45
-  xpos 1780
-  ypos 2305
+  name Grade3
+  xpos 1280
+  ypos 2288
  }
-push $Nad18b6e0
+set N118b8a00 [stack 0]
+push $N1102f240
+ OCIOColorSpace {
+  in_colorspace ACEScg
+  out_colorspace ACEScct
+  name OCIOColorSpace3
+  label "(\[value in_colorspace ] > \[value out_colorspace])"
+  xpos 3370
+  ypos 1456
+ }
+set N118caf00 [stack 0]
+ Blur {
+  channels rgba
+  size 2.1
+  name Blur18
+  xpos 3150
+  ypos 1526
+ }
+push $N118caf00
+ Merge2 {
+  inputs 2
+  operation difference
+  name Merge47
+  xpos 3370
+  ypos 1526
+ }
+ EXPTool {
+  mode Stops
+  red 2.8
+  green 2.8
+  blue 2.8
+  name Exposure5
+  xpos 3370
+  ypos 1592
+ }
+ Dot {
+  name Dot23
+  note_font_size 40
+  xpos 3404
+  ypos 2298
+ }
+push $Nfab1260
+ OCIOColorSpace {
+  in_colorspace ACEScg
+  out_colorspace ACEScct
+  name OCIOColorSpace2
+  label "(\[value in_colorspace ] > \[value out_colorspace])"
+  xpos 2930
+  ypos 1456
+ }
+set N11919de0 [stack 0]
+ Blur {
+  channels rgba
+  size 2.1
+  name Blur23
+  xpos 2820
+  ypos 1526
+ }
+push $N11919de0
+ Merge2 {
+  inputs 2
+  operation difference
+  name Merge51
+  xpos 2930
+  ypos 1526
+ }
+ EXPTool {
+  mode Stops
+  red 2.8
+  green 2.8
+  blue 2.8
+  name Exposure4
+  xpos 2930
+  ypos 1590
+ }
+ Keymix {
+  inputs 3
+  bbox B
+  name Keymix1
+  xpos 2930
+  ypos 2288
+ }
+push $N118b8a00
+push $N1102f240
  ColorLookup {
   lut {master {}
-    red {curve C 0.047 x0.4560000002 0.225 x1 0.7}
-    green {curve C 0.032 x0.4460000098 0.231 x1 0.663}
-    blue {curve C 0.037 x0.4560000002 0.608 x1 0.608 x1.390300035 0.6411}
-    alpha {}}
+	red {curve C 0.047 x0.4560000002 0.225 x1 0.7}
+	green {curve C 0.032 x0.4460000098 0.231 x1 0.663}
+	blue {curve C 0.037 x0.4560000002 0.608 x1 0.608 x1.390300035 0.6411}
+	alpha {}}
   name ColorLookup1
-  xpos 3460
-  ypos 1431
+  xpos 1780
+  ypos 1334
  }
  OCIOColorSpace {
   in_colorspace ACEScg
   out_colorspace ACEScct
   name OCIOColorSpace4
   label "(\[value in_colorspace ] > \[value out_colorspace])"
-  xpos 3460
-  ypos 1505
+  xpos 1779
+  ypos 1379
  }
  Colorspace {
   colorspace_out HSL
   name Colorspace1
-  xpos 3460
-  ypos 1551
+  xpos 1780
+  ypos 1462
  }
-set N6c34bef0 [stack 0]
+set N11999ba0 [stack 0]
  Dot {
   name Dot2
-  xpos 3773
-  ypos 1553
+  xpos 1814
+  ypos 1594
  }
- Dot {
-  name Dot3
-  xpos 3773
-  ypos 1673
+set N119b3fe0 [stack 0]
+push $N11999ba0
+ Median {
+  size 1
+  name Median2
+  xpos 1890
+  ypos 1462
  }
-push $N6c34bef0
- Dot {
-  name Dot4
-  xpos 3493
-  ypos 1633
- }
-set N49df5dc0 [stack 0]
- Group {
-  name RankFilter1
-  help "Rankfilter will pick the kth element out of a value set collected by the kernel, unlike a median which will go for the middle element.\n\nUsefull to bias more towards low or high frequencies. \n\nKernel size 1 equals a 3x3 filer, 2 a 5x5 filter. The size gets capped at 16x16\n\nK value of 0 goes for the lowest, 1 for the highest.\n."
-  xpos 3600
-  ypos 1631
-  addUserKnob {20 RankFilter}
-  addUserKnob {41 RankFilter_size l size t "Kernel size 1 equals a 3x3 filer, 2 a 5x5 filter. The size gets capped at 16x16." T RankFilter1.RankFilter_size}
-  addUserKnob {41 RankFilter_k l k T RankFilter1.RankFilter_k}
- }
-  Input {
-   inputs 0
-   name Input
-   xpos -494
-   ypos 177
-  }
-  BlinkScript {
-   recompileCount 94
-   ProgramGroup 1
-   KernelDescription "2 \"RankFilter\" iterate componentWise 9c432efd1fb9d867b50af955092987a704e875a37f1e7d0c6531e51905445acb 2 \"imageIn\" Read Ranged2D \"imageOut\" Write Point 2 \"size\" Int 1 AQAAAA== \"k\" Float 1 AAAAPw== 2 \"size\" 1 1 \"frequency\" 1 1 2 \"imageInrangeMin\" Int 2 1 AAAAAAAAAAA= \"imageInrangeMax\" Int 2 1 AAAAAAAAAAA="
-   kernelSource "// by Marian Mavrovic 2017\n\nkernel RankFilter : public ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRanged2D, eEdgeClamped> imageIn; \n  Image<eWrite, eAccessPoint> imageOut;          \n\nparam:\n  int size;  //The horizontal radius of our box blur\n  float frequency;  //The vertical radius of our box blur\n\nlocal:\n//int _filterSize;\n\n  void define() \{\n    defineParam(size, \"size\", 1); \n    defineParam(frequency, \"k\", 0.5f); \n  \}\n\n  void init()\n  \{\n    imageIn.setRange(-size-1, -size-1, size+1, size+1);\n\n  \}\n\n  void process(int2 pos)\n  \{\n\n    float vals\[256];\n\n    float size0 = size; \n\n    if (size<=0) \{\n      size0 = 1;\n    \}\n\n    if (size>=16) \{\n      size0 = 16;\n    \}\n\n    for (int j = -size0, index = 0; j <= size0; j++) \{\n      for (int i = -size0; i <= size0; i++, index++) \{\n        vals\[index] = imageIn(i, j);\n      \}\n    \}\n\n\n    float temp;\n    int _filterSize = (2 * size0 + 1) * (2 * size0 + 1);\n\n    for (int i = 0; i < _filterSize; i++) \{\n      for (int j = 0; j < (_filterSize - i - 1); j++) \{\n        if (vals\[j] > vals\[j + 1]) \{\n          temp = vals\[j];\n          vals\[j] = vals\[j + 1];\n          vals\[j + 1] = temp;\n        \}\n      \}\n    \}\n\n    int temp2 = int ( round ( _filterSize / ( 1.0  / frequency ) ) ) ;\n\n    if (temp2 >= _filterSize ) \{\n      temp2 = temp2-1;\n    \}\n\n    imageOut() = vals\[temp2];\n    \n  \}\n\};"
-   rebuild ""
-   rebuild_finalise ""
-   name RankFilter1
-   selected true
-   xpos -494
-   ypos 242
-  }
-  Output {
-   name Output1
-   xpos -494
-   ypos 327
-  }
- end_group
  Merge2 {
   inputs 2
   operation min
   mix 0.5
   name Min1
   label "\[switch \"1\" \[value mix] \"\" default \{set d \"\[value mix] mixed\"\}] "
-  xpos 3600
-  ypos 1665
+  xpos 1890
+  ypos 1584
  }
  Dot {
-  name Dot5
-  xpos 3633
-  ypos 1753
+  name Dot3
+  xpos 1924
+  ypos 1658
  }
-push $N49df5dc0
+push $N119b3fe0
  Merge2 {
   inputs 2
   operation difference
   bbox B
   name Merge2
   label "\[switch \"1\" \[value mix] \"\" default \{set d \"\[value mix] mixed\"\}] "
-  xpos 3460
-  ypos 1751
+  xpos 1780
+  ypos 1654
  }
  Multiply {
-  value 3
+  value 20
   name Multiply1
-  xpos 3460
-  ypos 1945
+  xpos 1780
+  ypos 1840
  }
  Dot {
-  name Dot46
+  name Dot5
   note_font_size 40
-  xpos 3493
-  ypos 2153
+  xpos 1754
+  ypos 2298
  }
-push $Nad18b6e0
- OCIOColorSpace {
-  in_colorspace ACEScg
-  out_colorspace ACEScct
-  name OCIOColorSpace3
-  label "(\[value in_colorspace ] > \[value out_colorspace])"
-  xpos 3320
-  ypos 1425
- }
-set N43358f00 [stack 0]
- Blur {
-  channels rgba
-  size {{parent.Blur23.size}}
-  name Blur18
-  xpos 3180
-  ypos 1511
- }
-push $N43358f00
- Merge2 {
-  inputs 2
-  operation difference
-  name Merge47
-  xpos 3320
-  ypos 1511
- }
-push $Nad18b6e0
- OCIOColorSpace {
-  in_colorspace ACEScg
-  out_colorspace ACEScct
-  name OCIOColorSpace13
-  label "(\[value in_colorspace ] > \[value out_colorspace])"
-  xpos 2480
-  ypos 1745
- }
-set N6122b560 [stack 0]
- ColorMatrix {
-  matrix {
-      {0.412424 0.357579 0.180464}
-      {0.212656 0.715158 0.0721856}
-      {0.0193324 0.119193 0.950444}
-    }
-  name RGBtoXYZ1
-  xpos 2760
-  ypos 1791
- }
- Expression {
-  expr0 (116*pow(g,1/3)-16)/100
-  expr1 500*(pow(r,1/3)-pow(g,1/3))/100
-  expr2 200*(pow(g,1/3)-pow(b,1/3))/100
-  name __XYZ_Lab__1
-  xpos 2760
-  ypos 1831
- }
- Matrix {
-  channels rgba
-  matrix {
-      {0 -1 0}
-      {-1 5 -1}
-      {0 -1 0}
-    }
-  normalize true
-  name Matrix1
-  label Sharpen
-  xpos 2760
-  ypos 1865
- }
- Expression {
-  expr0 pow(((g*100)/500+(((r*100)+16)/116)),3)
-  expr1 pow(((r*100+16)/116),3)
-  expr2 pow((((r*100+16)/116)-(b*100)/200),3)
-  name LabXyz1
-  xpos 2760
-  ypos 1911
- }
- ColorMatrix {
-  matrix {
-      {0.412424 0.357579 0.180464}
-      {0.212656 0.715158 0.0721856}
-      {0.0193324 0.119193 0.950444}
-    }
-  invert true
-  name XYZtoRGB1
-  xpos 2760
-  ypos 1951
- }
-push $N6122b560
- Merge2 {
-  inputs 2
-  operation from
-  bbox B
-  name Merge50
-  xpos 2480
-  ypos 1951
- }
- Switch {
-  inputs 3
-  which {{parent.SW1.which}}
-  name SW2
-  xpos 2480
-  ypos 2151
- }
- Dot {
-  name Dot47
-  note_font_size 40
-  xpos 2513
-  ypos 2313
- }
-push $N71bcd080
+push $Nfaa70e0
  ColorLookup {
   lut {master {}
-    red {curve C 0.047 x0.4560000002 0.225 x1 0.7}
-    green {curve C 0.032 x0.4460000098 0.231 x1 0.663}
-    blue {curve C 0.037 x0.4560000002 0.608 x1 0.608 x1.390300035 0.6411}
-    alpha {}}
+	red {curve C 0.047 x0.4560000002 0.225 x1 0.7}
+	green {curve C 0.032 x0.4460000098 0.231 x1 0.663}
+	blue {curve C 0.037 x0.4560000002 0.608 x1 0.608 x1.390300035 0.6411}
+	alpha {}}
   name ColorLookup2
   xpos 1500
-  ypos 1311
+  ypos 1334
  }
  OCIOColorSpace {
   in_colorspace ACEScg
@@ -855,80 +1078,43 @@ push $N71bcd080
   name OCIOColorSpace6
   label "(\[value in_colorspace ] > \[value out_colorspace])"
   xpos 1500
-  ypos 1345
+  ypos 1380
  }
  Colorspace {
   colorspace_out HSL
   name Colorspace2
   xpos 1500
-  ypos 1431
+  ypos 1462
  }
-set Necc85290 [stack 0]
- Dot {
-  name Dot128
-  xpos 1673
-  ypos 1433
- }
- Dot {
-  name Dot129
-  xpos 1673
-  ypos 1553
- }
-push $Necc85290
+set N11a29ec0 [stack 0]
  Dot {
   name Dot130
-  xpos 1533
-  ypos 1513
+  xpos 1534
+  ypos 1594
  }
-set N99aaf5c0 [stack 0]
- Group {
-  name RankFilter
-  help "Rankfilter will pick the kth element out of a value set collected by the kernel, unlike a median which will go for the middle element.\n\nUsefull to bias more towards low or high frequencies. \n\nKernel size 1 equals a 3x3 filer, 2 a 5x5 filter. The size gets capped at 16x16\n\nK value of 0 goes for the lowest, 1 for the highest.\n."
-  xpos 1640
-  ypos 1511
-  addUserKnob {20 RankFilter}
-  addUserKnob {41 RankFilter_size l size t "Kernel size 1 equals a 3x3 filer, 2 a 5x5 filter. The size gets capped at 16x16." T RankFilter1.RankFilter_size}
-  addUserKnob {41 RankFilter_k l k T RankFilter1.RankFilter_k}
+set N11a43e30 [stack 0]
+push $N11a29ec0
+ Median {
+  size 1
+  name Median1
+  xpos 1610
+  ypos 1462
  }
-  Input {
-   inputs 0
-   name Input
-   xpos -494
-   ypos 177
-  }
-  BlinkScript {
-   recompileCount 94
-   ProgramGroup 1
-   KernelDescription "2 \"RankFilter\" iterate componentWise 9c432efd1fb9d867b50af955092987a704e875a37f1e7d0c6531e51905445acb 2 \"imageIn\" Read Ranged2D \"imageOut\" Write Point 2 \"size\" Int 1 AQAAAA== \"k\" Float 1 AAAAPw== 2 \"size\" 1 1 \"frequency\" 1 1 2 \"imageInrangeMin\" Int 2 1 AAAAAAAAAAA= \"imageInrangeMax\" Int 2 1 AAAAAAAAAAA="
-   kernelSource "// by Marian Mavrovic 2017\n\nkernel RankFilter : public ImageComputationKernel<eComponentWise>\n\{\n  Image<eRead, eAccessRanged2D, eEdgeClamped> imageIn; \n  Image<eWrite, eAccessPoint> imageOut;          \n\nparam:\n  int size;  //The horizontal radius of our box blur\n  float frequency;  //The vertical radius of our box blur\n\nlocal:\n//int _filterSize;\n\n  void define() \{\n    defineParam(size, \"size\", 1); \n    defineParam(frequency, \"k\", 0.5f); \n  \}\n\n  void init()\n  \{\n    imageIn.setRange(-size-1, -size-1, size+1, size+1);\n\n  \}\n\n  void process(int2 pos)\n  \{\n\n    float vals\[256];\n\n    float size0 = size; \n\n    if (size<=0) \{\n      size0 = 1;\n    \}\n\n    if (size>=16) \{\n      size0 = 16;\n    \}\n\n    for (int j = -size0, index = 0; j <= size0; j++) \{\n      for (int i = -size0; i <= size0; i++, index++) \{\n        vals\[index] = imageIn(i, j);\n      \}\n    \}\n\n\n    float temp;\n    int _filterSize = (2 * size0 + 1) * (2 * size0 + 1);\n\n    for (int i = 0; i < _filterSize; i++) \{\n      for (int j = 0; j < (_filterSize - i - 1); j++) \{\n        if (vals\[j] > vals\[j + 1]) \{\n          temp = vals\[j];\n          vals\[j] = vals\[j + 1];\n          vals\[j + 1] = temp;\n        \}\n      \}\n    \}\n\n    int temp2 = int ( round ( _filterSize / ( 1.0  / frequency ) ) ) ;\n\n    if (temp2 >= _filterSize ) \{\n      temp2 = temp2-1;\n    \}\n\n    imageOut() = vals\[temp2];\n    \n  \}\n\};"
-   rebuild ""
-   rebuild_finalise ""
-   name RankFilter1
-   selected true
-   xpos -494
-   ypos 242
-  }
-  Output {
-   name Output1
-   xpos -494
-   ypos 327
-  }
- end_group
  Merge2 {
   inputs 2
   operation min
   mix 0.5
   name Min2
   label "\[switch \"1\" \[value mix] \"\" default \{set d \"\[value mix] mixed\"\}] "
-  xpos 1640
-  ypos 1545
+  xpos 1610
+  ypos 1584
  }
  Dot {
   name Dot131
-  xpos 1673
-  ypos 1633
+  xpos 1644
+  ypos 1658
  }
-push $N99aaf5c0
+push $N11a43e30
  Merge2 {
   inputs 2
   operation difference
@@ -936,445 +1122,410 @@ push $N99aaf5c0
   name Merge48
   label "\[switch \"1\" \[value mix] \"\" default \{set d \"\[value mix] mixed\"\}] "
   xpos 1500
-  ypos 1631
+  ypos 1654
  }
  Multiply {
-  value 3
+  value 20
   name Multiply6
   xpos 1500
-  ypos 1825
+  ypos 1840
  }
- Dot {
-  name Dot40
-  note_font_size 40
-  xpos 1533
-  ypos 2113
+ Keymix {
+  inputs 3
+  bbox B
+  name Keymix3
+  xpos 1500
+  ypos 2288
  }
-push $N71bd7190
+push $N118b8a00
+push $N1102f240
  OCIOColorSpace {
   in_colorspace ACEScg
   out_colorspace ACEScct
-  name OCIOColorSpace2
+  name OCIOColorSpace13
   label "(\[value in_colorspace ] > \[value out_colorspace])"
-  xpos 2900
-  ypos 1425
+  xpos 2490
+  ypos 1776
  }
-set Nee8a7d00 [stack 0]
- Blur {
+set N11a910e0 [stack 0]
+ ColorMatrix {
+  matrix {
+  	{0.412424 0.357579 0.180464}
+  	{0.212656 0.715158 0.0721856}
+  	{0.0193324 0.119193 0.950444}
+	}
+  name RGBtoXYZ1
+  xpos 2710
+  ypos 1782
+ }
+ Expression {
+  expr0 (116*pow(g,1/3)-16)/100
+  expr1 500*(pow(r,1/3)-pow(g,1/3))/100
+  expr2 200*(pow(g,1/3)-pow(b,1/3))/100
+  name __XYZ_Lab__1
+  xpos 2710
+  ypos 1846
+ }
+ Matrix {
   channels rgba
-  size 2.1
-  name Blur23
-  xpos 2760
-  ypos 1511
+  matrix {
+  	{0 -1 0}
+  	{-1 5 -1}
+  	{0 -1 0}
+	}
+  normalize true
+  name Matrix1
+  label Sharpen
+  xpos 2710
+  ypos 1840
  }
-push $Nee8a7d00
+ Expression {
+  expr0 pow(((g*100)/500+(((r*100)+16)/116)),3)
+  expr1 pow(((r*100+16)/116),3)
+  expr2 pow((((r*100+16)/116)-(b*100)/200),3)
+  name LabXyz1
+  xpos 2710
+  ypos 1910
+ }
+ ColorMatrix {
+  matrix {
+  	{0.412424 0.357579 0.180464}
+  	{0.212656 0.715158 0.0721856}
+  	{0.0193324 0.119193 0.950444}
+	}
+  invert true
+  name XYZtoRGB1
+  xpos 2710
+  ypos 1974
+ }
+push $N11a910e0
  Merge2 {
   inputs 2
-  operation difference
-  name Merge51
-  xpos 2900
-  ypos 1511
+  operation from
+  bbox B
+  name Merge50
+  xpos 2490
+  ypos 1974
  }
-push $N71bd20d0
+ EXPTool {
+  mode Stops
+  red 2.1
+  green 2.1
+  blue 2.1
+  name Exposure3
+  xpos 2490
+  ypos 2038
+ }
+ Dot {
+  name Dot47
+  note_font_size 40
+  xpos 2524
+  ypos 2298
+ }
+push $Nfaac1a0
  OCIOColorSpace {
   in_colorspace ACEScg
   out_colorspace ACEScct
   name OCIOColorSpace5
   label "(\[value in_colorspace ] > \[value out_colorspace])"
-  xpos 2060
-  ypos 1305
+  xpos 2050
+  ypos 1328
  }
-set N1366a430 [stack 0]
+set N11b12b40 [stack 0]
  ColorMatrix {
   matrix {
-      {0.412424 0.357579 0.180464}
-      {0.212656 0.715158 0.0721856}
-      {0.0193324 0.119193 0.950444}
-    }
+  	{0.412424 0.357579 0.180464}
+  	{0.212656 0.715158 0.0721856}
+  	{0.0193324 0.119193 0.950444}
+	}
   name RGBtoXYZ
-  xpos 2340
-  ypos 1351
+  xpos 2380
+  ypos 1334
  }
  Expression {
   expr0 (116*pow(g,1/3)-16)/100
   expr1 500*(pow(r,1/3)-pow(g,1/3))/100
   expr2 200*(pow(g,1/3)-pow(b,1/3))/100
   name __XYZ_Lab__
-  xpos 2340
-  ypos 1391
+  xpos 2380
+  ypos 1398
  }
  Matrix {
   channels rgba
   matrix {
-      {0 -1 0}
-      {-1 5 -1}
-      {0 -1 0}
-    }
+  	{0 -1 0}
+  	{-1 5 -1}
+  	{0 -1 0}
+	}
   normalize true
   name Matrix8
   label Sharpen
-  xpos 2340
-  ypos 1425
+  xpos 2380
+  ypos 1456
  }
  Expression {
   expr0 pow(((g*100)/500+(((r*100)+16)/116)),3)
   expr1 pow(((r*100+16)/116),3)
   expr2 pow((((r*100+16)/116)-(b*100)/200),3)
   name LabXyz
-  xpos 2340
-  ypos 1471
+  xpos 2380
+  ypos 1495
  }
  ColorMatrix {
   matrix {
-      {0.412424 0.357579 0.180464}
-      {0.212656 0.715158 0.0721856}
-      {0.0193324 0.119193 0.950444}
-    }
+  	{0.412424 0.357579 0.180464}
+  	{0.212656 0.715158 0.0721856}
+  	{0.0193324 0.119193 0.950444}
+	}
   invert true
   name XYZtoRGB
-  xpos 2340
-  ypos 1511
+  xpos 2380
+  ypos 1526
  }
-push $N1366a430
+push $N11b12b40
  Merge2 {
   inputs 2
   operation from
   bbox B
   name Merge52
-  xpos 2060
-  ypos 1511
+  xpos 2050
+  ypos 1526
  }
- Switch {
-  inputs 3
-  which {{parent.GRAINSWITCH.GrainType}}
-  name SW1
-  xpos 2060
-  ypos 2111
+ EXPTool {
+  mode Stops
+  red 2.1
+  green 2.1
+  blue 2.1
+  name Exposure2
+  xpos 2050
+  ypos 1718
  }
  Keymix {
   inputs 3
+  bbox B
   name Keymix2
-  xpos 2060
-  ypos 2305
+  xpos 2050
+  ypos 2288
  }
- EXPTool {
-  red 0.85
-  green 0.85
-  blue 0.85
-  name Exposure4
-  xpos 2060
-  ypos 2431
- }
+push $Nfaa2020
  Expression {
-  temp_name0 rw
-  temp_expr0 Weight.r
-  temp_name1 gw
-  temp_expr1 Weight.g
-  temp_name2 bw
-  temp_expr2 Weight.b
-  expr0 ((rw*r)+(gw*g)+(bw*b))
-  expr1 ((rw*r)+(gw*g)+(bw*b))
-  expr2 ((rw*r)+(gw*g)+(bw*b))
-  name Monochrome_Tg1
-  tile_color 0x31593dff
-  note_font_color 0xffff00ff
-  xpos 2060
-  ypos 2551
-  disable {{parent.GRAINSWITCH.GrainColour}}
-  addUserKnob {20 ColourWeight}
-  addUserKnob {18 Weight}
-  Weight {0.3 0.59 0.11}
-  addUserKnob {6 Weight_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
+  expr0 isnan(r)
+  expr1 isnan(g)
+  expr2 isnan(b)
+  name Expression4
+  xpos 510
+  ypos 1654
  }
+push $Nfa9cf60
+ Expression {
+  temp_name0 zero
+  temp_expr0 "a>0?r <= 0 ? 1 : g <= 0 ?  1 : b <= 0 ? 1 :0:0"
+  temp_name1 max
+  temp_expr1 "r >= 14 ? 1 : g >= 14 ?  1 : b >= 14 ? 1 :0"
+  expr0 "isinf(r) ? 0 :zero?1:r*.05"
+  expr1 "isinf(g) ? 0 :max?1:g*.05"
+  expr2 "isinf(r) ? 1 : isinf(g) ?  1 :isinf(b) ? 1:isinf(r) ? 1 : isnan(g) ?  1 :isnan(b) ? 1:r*.05"
+  channel3 alpha
+  expr3 0
+  name expression2
+  xpos 400
+  ypos 1654
+ }
+push $Nfa97f50
  Dot {
-  name Dot41
-  note_font_size 40
-  xpos 2093
-  ypos 2753
+  name Dot49
+  xpos 324
+  ypos 1530
  }
-push $Nc46ee50
+set N11bb4f80 [stack 0]
+ Expression {
+  expr0 "r<0 ? 1:0"
+  expr1 "g<0 ? 1:0"
+  expr2 "b<0 ? 1:0"
+  name Expression3
+  xpos 180
+  ypos 1654
+ }
+push $N11bb4f80
+ Grade {
+  white 0.1
+  name Grade1
+  xpos 290
+  ypos 1590
+ }
+ Merge2 {
+  inputs 2
+  operation screen
+  name Merge4
+  xpos 290
+  ypos 1654
+ }
+push $Nfa92d90
+ FrameHold {
+  firstFrame 1001
+  increment 8
+  name FrameHold1
+  xpos 70
+  ypos 1584
+ }
+push $Nfa8dcd0
+ Reformat {
+  type scale
+  scale {2 2}
+  filter impulse
+  name Reformat1
+  xpos -40
+  ypos 1526
+ }
+ Tile {
+  rows 2
+  columns 2
+  filter impulse
+  name Tile1
+  xpos -40
+  ypos 1590
+ }
+ Reformat {
+  type scale
+  scale {0.5 0.5}
+  resize none
+  filter impulse
+  name Reformat2
+  xpos -40
+  ypos 1654
+  disable {{reformat_out-1}}
+ }
+push $Nfa88c10
  ColorMatrix {
   matrix {
-      {0.412424 0.357579 0.180464}
-      {0.212656 0.715158 0.0721856}
-      {0.0193324 0.119193 0.950444}
-    }
-  name RGBtoXYZ2
-  xpos 800
-  ypos 1431
+  	{0.412424 0.357579 0.180464}
+  	{0.212656 0.715158 0.0721856}
+  	{0.0193324 0.119193 0.950444}
+	}
+  name RGBtoXYZ3
+  xpos -150
+  ypos 1526
  }
  Expression {
   expr0 (116*pow(g,1/3)-16)/100
   expr1 500*(pow(r,1/3)-pow(g,1/3))/100
   expr2 200*(pow(g,1/3)-pow(b,1/3))/100
-  name __XYZ_Lab__2
-  xpos 800
-  ypos 1471
+  name __XYZ_Lab__3
+  xpos -150
+  ypos 1581
  }
  Matrix {
   channels rgba
   matrix {
-      {0 -1 0}
-      {-1 5 -1}
-      {0 -1 0}
-    }
+  	{0 -1 0}
+  	{-1 5 -1}
+  	{0 -1 0}
+	}
   normalize true
-  name Matrix2
+  name Matrix3
   label Sharpen
-  xpos 800
-  ypos 1505
+  xpos -150
+  ypos 1628
  }
  Expression {
   expr0 pow(((g*100)/500+(((r*100)+16)/116)),3)
   expr1 pow(((r*100+16)/116),3)
   expr2 pow((((r*100+16)/116)-(b*100)/200),3)
-  name LabXyz2
-  xpos 800
-  ypos 1551
+  name LabXyz3
+  xpos -150
+  ypos 1679
  }
  ColorMatrix {
   matrix {
-      {0.412424 0.357579 0.180464}
-      {0.212656 0.715158 0.0721856}
-      {0.0193324 0.119193 0.950444}
-    }
+  	{0.412424 0.357579 0.180464}
+  	{0.212656 0.715158 0.0721856}
+  	{0.0193324 0.119193 0.950444}
+	}
   invert true
-  name XYZtoRGB2
-  xpos 800
-  ypos 1591
+  name XYZtoRGB3
+  xpos -150
+  ypos 1718
  }
+push $Nfa83b00
  Dot {
-  name Dot39
-  note_font_size 40
-  xpos 833
-  ypos 1993
+  name Dot48
+  xpos -336
+  ypos 1530
  }
-push $Nc464cd0
- Keyer {
-  operation "luminance key"
-  range {0.2731244161 1 1 1}
-  name Keyer13
-  xpos 380
-  ypos 1585
- }
- Constant {
-  inputs 0
-  channels rgb
-  name Constant1
-  xpos 660
-  ypos 1487
- }
- Expression {
-  expr0 "sin(sqrt(x * x + y * y ) / 1)"
-  expr1 "sin(sqrt(x * x + y * y ) / 1)"
-  expr2 "sin(sqrt(x * x + y * y ) / 1)"
-  name Expression6
-  xpos 660
-  ypos 1591
- }
-push $Nc469d90
- Keymix {
-  inputs 3
-  name Keymix3
-  xpos 520
-  ypos 1585
- }
- Dot {
-  name Dot38
-  note_font_size 40
-  xpos 553
-  ypos 1993
- }
-push $N28d38ef0
- Expression {
-  expr0 r+(x==(width/2)?10000:0)+(y==(height/2)?10000:0)
-  name CenterMeasure2
-  xpos 240
-  ypos 1591
- }
- Dot {
-  name Dot37
-  note_font_size 40
-  xpos 273
-  ypos 1993
- }
-push $N28d33e30
- Mirror2 {
-  flop true
-  name Mirror2_3
-  xpos 100
-  ypos 1591
- }
- Dot {
-  name Dot36
-  note_font_size 40
-  xpos 133
-  ypos 1993
- }
-push $N28d2ed90
- Saturation {
-  saturation 4
-  mode "Ccir 601"
-  name Saturation1
-  xpos -40
-  ypos 1591
- }
- Dot {
-  name Dot35
-  note_font_size 40
-  xpos -7
-  ypos 1993
- }
-push $N28d29d70
+set N11c61480 [stack 0]
  OCIOLogConvert {
   operation "lin to log"
   name OCIOLogConvert2
-  xpos -180
-  ypos 1591
+  xpos -260
+  ypos 1590
  }
- Dot {
-  name Dot34
-  note_font_size 40
-  xpos -147
-  ypos 1993
- }
-push $Nac3c7810
+push $N11c61480
  OCIOColorSpace {
   in_colorspace ACEScg
   out_colorspace ACEScct
   name OCIOColorSpace1
-  label "(\[value in_colorspace ] > \[value out_colorspace])"
-  xpos -320
-  ypos 1465
+  xpos -370
+  ypos 1590
  }
- Saturation {
-  saturation 4
-  name Saturation2
-  xpos -320
-  ypos 1591
- }
- Dot {
-  name Dot33
-  note_font_size 40
-  xpos -287
-  ypos 1993
- }
-push $Nac3c2650
- Expression {
-  temp_name0 rw
-  temp_expr0 Weight.r
-  temp_name1 gw
-  temp_expr1 Weight.g
-  temp_name2 bw
-  temp_expr2 Weight.b
-  expr0 ((rw*r)+(gw*g)+(bw*b))
-  expr1 ((rw*r)+(gw*g)+(bw*b))
-  expr2 ((rw*r)+(gw*g)+(bw*b))
-  name Monochrome_Tg
-  tile_color 0x31593dff
-  note_font_color 0xffff00ff
-  xpos -460
-  ypos 1591
-  addUserKnob {20 ColourWeight}
-  addUserKnob {18 Weight}
-  Weight {0.3 0.59 0.11}
-  addUserKnob {6 Weight_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
-  addUserKnob {6 Weight_panelDropped_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1 l "panel dropped state" -STARTLINE +HIDDEN}
- }
- Dot {
-  name Dot32
-  note_font_size 40
-  xpos -427
-  ypos 1993
- }
-push $Nac3bd560
  Switch {
-  inputs 15
+  inputs 2
+  which {{"\[python \{nuke.thisNode().treeHasError()\}]"}}
+  name Switch1
+  label "If Error switch"
+  xpos -370
+  ypos 1648
+ }
+push $Nfa7ea60
+ Expression {
+  expr0 ((.3*r)+(.59*g)+(.11*b))
+  expr1 ((.3*r)+(.59*g)+(.11*b))
+  expr2 ((.3*r)+(.59*g)+(.11*b))
+  name Expression2
+  xpos -480
+  ypos 1590
+ }
+push $Nfa799c0
+ Switch {
+  inputs 20
   which {{parent.MASTERSWITCH.QC}}
   name Switch6
-  xpos -600
-  ypos 3791
-  hide_input true
+  xpos -590
+  ypos 3766
+ }
+ Mirror2 {
+  name Mirror2_1
+  xpos -590
+  ypos 4150
+ }
+ EXPTool {
+  mode Stops
+  name Exposure1
+  xpos -590
+  ypos 4214
+ }
+ Gamma {
+  name Gamma1
+  xpos -590
+  ypos 4272
+ }
+ Saturation {
+  mode "Ccir 601"
+  name Saturation3
+  xpos -590
+  ypos 4342
  }
  NoOp {
   name MASTERSWITCH
-  xpos -600
-  ypos 3991
+  xpos -590
+  ypos 4470
   addUserKnob {20 User}
-  addUserKnob {68 QC M {Comp Monochrome LogSat Log Saturation Mirror Measure Highlights Sharpen Grain Difference "Check Edges" "Negative Values" "Inf Values" "NaN Values" "" "" "" "" "" "" ""}}
-  QC "Check Edges"
- }
- Grade {
-  multiply {{pow(2,stops)} {pow(2,stops)} {pow(2,stops)} {pow(2,stops)}}
-  multiply_panelDropped true
-  black_clamp false
-  name Grade_In_Stops
-  label "\nExposure (\[value stops])"
-  note_font "Bitstream Vera Sans"
-  xpos -600
-  ypos 4179
-  addUserKnob {20 Stops}
-  addUserKnob {7 stops R -5 5}
+  addUserKnob {68 QC M {Viewer Monochrome Log Sharpen Edges Increment "Negative Values" "INF Values" "NAN Values" "Grain 1" "Grain 2" "Grain 3" Difference Mask Centre Thirds Leading Odds Diagonal Golden "" "" "" "" "" "" "" "" "" "" "" "" ""}}
  }
  Output {
   name Output1
-  xpos -600
-  ypos 4551
- }
- NoOp {
-  inputs 0
-  name THIS_SWITCH
-  xpos -740
-  ypos 151
-  addUserKnob {20 User}
-  addUserKnob {4 View M {Comp Plate "" ""}}
-  View Plate
- }
- NoOp {
-  inputs 0
-  name GRAINSWITCH
-  xpos 2480
-  ypos 2551
-  addUserKnob {20 User}
-  addUserKnob {4 GrainType M {Type1 Type2 Type3}}
-  GrainType Type2
-  addUserKnob {6 GrainColour +STARTLINE}
-  GrainColour true
+  xpos -590
+  ypos 4534
  }
 end_group
-
 
 
